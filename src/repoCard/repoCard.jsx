@@ -13,7 +13,7 @@ const RepoCard = ({ repos }) => {
         <div className={styles.header}>
           <h4>Repo name</h4>
           <h4>Stars count</h4>
-          <h4>Updsted at:</h4>
+          <h4>Updated at:</h4>
           <h4>GitHub link</h4>
         </div>
         {repos.map((el) => (

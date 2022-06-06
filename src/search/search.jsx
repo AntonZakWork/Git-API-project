@@ -26,7 +26,9 @@ const Search = () => {
       <div className={styles.searchBar}>
         <input
           className={styles.input}
-          onChange={(e) => dispatch(setSearchInput(e.target.value))}
+          onChange={(e) => {
+            dispatch(setSearchInput(e.target.value));
+          }}
           value={searchInput}
           type="text"
         />

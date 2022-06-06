@@ -37,6 +37,15 @@ export const fetchRepo = createAsyncThunk('search/fetchRepo', async (_, { dispat
   dispatch(setIsLoading(false));
 });
 
+export const fetchContributors = createAsyncThunk(
+  'search/Contributors',
+  async (contributorsLink, { dispatch }) => {
+    const response = await fetch(`${contributorsLink}?page=1&per_page=10`);
+    const data = await response.json();
+    dispatch(setContributorsData(data));
+  },
+);
+
 const initialState = {
   searchInput: '',
   currentRequest: '',
@@ -48,6 +57,8 @@ const initialState = {
   currentProfileURL: '',
   repoData: [],
   currentProfileName: '',
+  showPopup: false,
+  contributorsData: [],
 };
 
 export const searchSlice = createSlice({
@@ -90,6 +101,12 @@ export const searchSlice = createSlice({
     changeCurrPageArrow(state, action) {
       state.currentPage = state.currentPage + action.payload;
     },
+    changeShowPopup(state) {
+      state.showPopup = !state.showPopup;
+    },
+    setContributorsData(state, action) {
+      state.contributorsData = action.payload;
+    },
   },
 });
 
@@ -105,5 +122,7 @@ export const {
   setRepoData,
   setCurrentProfileName,
   changeCurrPageArrow,
+  changeShowPopup,
+  setContributorsData,
 } = searchSlice.actions;
 export default searchSlice.reducer;
