@@ -1,0 +1,22 @@
+.paginationContainer {
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+}
+
+.pageNumber {
+    padding: 5px;
+}
+.pageNumber:hover {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration:underline;
+}
+.arrow:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
