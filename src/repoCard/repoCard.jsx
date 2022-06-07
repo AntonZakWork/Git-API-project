@@ -11,40 +11,36 @@ const RepoCard = ({ repos }) => {
   return (
     <div>
       <div>
-        <div className={styles.header}>
-          <h4>Repo name</h4>
-          <h4>Stars count</h4>
-          <h4>Updated at:</h4>
-          <h4>GitHub link</h4>
-        </div>
-        {repos.map((el) => (
-          <>
-            <div
-              key={el.url}
-              className={styles.container}
-              onClick={() => {
-                dispatch(reset());
-                dispatch(setCurrentProfileURL(el.url));
-                dispatch(setIsLoading(true));
-                navigate(`/repo/${el.name}`);
-              }}>
-              <div className={styles.linkedProp} key={el.id}>
-                {el.name}
-              </div>
+        <div className={styles.reposWrapper}>
+          {repos.map((el) => (
+            <>
+              <div
+                key={el.url}
+                className={styles.container}
+                onClick={() => {
+                  dispatch(reset());
+                  dispatch(setCurrentProfileURL(el.url));
+                  dispatch(setIsLoading(true));
+                  navigate(`/repo/${el.full_name}`);
+                }}>
+                <div className={styles.linkedProp} key={el.id}>
+                  {el.name}
+                </div>
 
-              <div className={styles.prop} key={el.stargazers_count}>
-                <img className={styles.star} src={image} alt="" />
-                {el.stargazers_count}
+                <div className={styles.prop} key={el.stargazers_count}>
+                  <img className={styles.star} src={image} alt="" />
+                  {el.stargazers_count}
+                </div>
+                <div className={styles.prop} key={el.updated_at}>
+                  {el.updated_at.toString().slice(0, 10)}
+                </div>
+                <div className={styles.linkedProp} key={el.svn_url}>
+                  <a href={el.svn_url}>Open with GitHub</a>
+                </div>
               </div>
-              <div className={styles.prop} key={el.updated_at}>
-                {el.updated_at.toString().slice(0, 10)}
-              </div>
-              <div className={styles.linkedProp} key={el.svn_url}>
-                <a href={el.svn_url}>Open with GitHub</a>
-              </div>
-            </div>
-          </>
-        ))}
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );

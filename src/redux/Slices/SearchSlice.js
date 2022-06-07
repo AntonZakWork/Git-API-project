@@ -1,43 +1,47 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchInitUsers = createAsyncThunk('search/fetchInitUsers', async (_, { dispatch }) => {
-  debugger;
-  dispatch(setIsLoading(true));
-  const response = await fetch(
-    `https://api.github.com/search/repositories?q=stars%3A%3E0&sort=stars&order=desc&page=1&per_page=10`,
-  );
-  const data = await response.json();
-  dispatch(setRepos(data.items));
-  dispatch(setIsLoading(false));
-});
-
-export const fetchSearchUsers = createAsyncThunk(
-  'search/fetchSearchUsers',
-  async ({ value, pageNumber = 1 }, { dispatch, getState }) => {
-    debugger;
+export const fetchData = createAsyncThunk(
+  'search/fetchData',
+  async (payload, { dispatch, getState }) => {
     dispatch(setIsLoading(true));
     const state = getState();
-    const response = await fetch(
-      `https://api.github.com/search/repositories?q=${value} in:name&sort=stars&order=desc&page=${pageNumber}&per_page=10`,
-    );
-    const data = await response.json();
-    dispatch(setRepos(data.items));
-    dispatch(setIsLoading(false));
-    if (state.search.pagesArr.length === 0) {
-      dispatch(setTotalReposCount(data.total_count));
-      dispatch(setPagesArr());
-      dispatch(setIsLoading(false));
+    const baseGit = 'https://api.github.com/';
+    switch (payload.type) {
+      default: {
+        console.log('error');
+        break;
+      }
+      case 'FETCH_USERS':
+        {
+          let filter = 'in:name';
+          if (!payload.pageNumber) payload.pageNumber = 1;
+          if (!payload.value) {
+            payload.value = '';
+            filter = 'stars%3A%3E0';
+          }
+          const response = await fetch(
+            `${baseGit}search/repositories?q=${`${payload.value}${filter}`}&sort=stars&order=desc&page=${
+              payload.pageNumber
+            }&per_page=10`,
+          );
+          const data = await response.json();
+          dispatch(setRepos(data.items));
+          dispatch(setIsLoading(false));
+          if (state.search.pagesArr.length === 0) {
+            dispatch(setTotalReposCount(data.total_count));
+            dispatch(setPagesArr());
+          }
+        }
+        break;
+      case 'FETCH_REPO': {
+        const response = await fetch(`${baseGit}repos/${payload.author}/${payload.repo}`);
+        const data = await response.json();
+        dispatch(setRepoData(data));
+        dispatch(setIsLoading(false));
+      }
     }
   },
 );
-
-export const fetchRepo = createAsyncThunk('search/fetchRepo', async (_, { dispatch, getState }) => {
-  const state = getState();
-  const response = await fetch(state.search.currentProfileURL);
-  const data = await response.json();
-  dispatch(setRepoData(data));
-  dispatch(setIsLoading(false));
-});
 
 export const fetchContributors = createAsyncThunk(
   'search/Contributors',

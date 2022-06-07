@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  fetchInitUsers,
-  fetchSearchUsers,
+  fetchData,
   reset,
   setCurrentPage,
   setCurrentRequest,
@@ -19,7 +18,7 @@ const Search = () => {
     dispatch(setCurrentPage(1));
     dispatch(setCurrentRequest(value));
     navigate(`/search/${value}/1`);
-    dispatch(fetchSearchUsers({ value }));
+    dispatch(fetchData({ type: 'FETCH_USERS', value }));
   };
   return (
     <div>
@@ -33,7 +32,7 @@ const Search = () => {
           type="text"
         />
         <button
-          className={styles.button}
+          className={searchInput ? `${styles.button}` : `${styles.button_disabled}`}
           disabled={searchInput ? false : true}
           onClick={() => search(searchInput)}>
           Search

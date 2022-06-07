@@ -1,39 +1,41 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import Pagination from '../Pagination/Pagination';
-import {
-  fetchInitUsers,
-  fetchSearchUsers,
-  setCurrentPage,
-  setCurrentRequest,
-} from '../redux/Slices/SearchSlice';
+import { fetchData, setCurrentPage } from '../redux/Slices/SearchSlice';
 import RepoCard from '../repoCard/repoCard';
+import Spinner from '../Spinner/Spinner';
 import styles from './RepoContainer.module.css';
 
 const RepoContainer = () => {
   const { currentRequest, repos, isLoading, currentPage } = useSelector((state) => state.search);
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
-    debugger;
     if (value === currentRequest && +pageNumber === currentPage) return;
     if (!value) {
-      dispatch(fetchInitUsers());
+      dispatch(fetchData({ type: 'FETCH_USERS', pageNumber }));
     } else {
-      dispatch(fetchSearchUsers({ value, pageNumber }));
-      dispatch(setCurrentRequest(value));
-      pageNumber <= 10 ? dispatch(setCurrentPage(pageNumber)) : dispatch(setCurrentPage(1));
+      dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
+      pageNumber <= 10 ? dispatch(setCurrentPage(pageNumber)) : navigate('*');
     }
   }, []);
 
   return (
-    <div className={styles.repoContainer}>
+    <div>
       <Header />
+      <div className={styles.header}>
+        <h4>Repo name</h4>
+        <h4>Stars count</h4>
+        <h4>Updated at:</h4>
+        <h4>GitHub link</h4>
+      </div>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className={styles.loaderContainer}>
+          <Spinner />
+        </div>
       ) : (
         <div>
           <RepoCard repos={repos} />

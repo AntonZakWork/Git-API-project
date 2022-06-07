@@ -10,13 +10,7 @@
 .container:hover{
     border: 2px solid rgba(149, 150, 151, 1);
 }
-.header {
-    margin-left: 10px;
-    margin-bottom: 0px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
 
-}
 .prop {
     position: relative;
     padding: 5px;

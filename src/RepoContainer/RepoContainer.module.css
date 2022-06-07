@@ -1,3 +1,10 @@
-.repoContainer{
-    height: 85vh;
+.header {
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+}
+.loaderContainer{
+    height:480px;
+    max-height: 80vh;
 }

@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  changeCurrPageArrow,
-  fetchSearchUsers,
-  setCurrentPage,
-  setIsLoading,
-} from '../redux/Slices/SearchSlice';
+import { fetchData, setCurrentPage, setIsLoading } from '../redux/Slices/SearchSlice';
 import './Pagination.css';
 
 const Pagination = () => {
   const { pagesArr, currentPage, currentRequest } = useSelector((state) => state.search);
+
   const dispatch = useDispatch();
-  const { value, pageNumber } = useParams();
+
+  let { value, pageNumber } = useParams();
+
   const navigate = useNavigate();
+
   useEffect(() => {
-    debugger;
     if (value === currentRequest && +pageNumber === currentPage) return;
-    dispatch(fetchSearchUsers({ value, pageNumber }));
+    dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
   }, []);
 
   const changePage = (pageNumber) => {
@@ -25,57 +23,61 @@ const Pagination = () => {
     dispatch(setIsLoading(true));
     dispatch(setCurrentPage(pageNumber));
     if (value === currentRequest && +pageNumber === currentPage) return;
-    dispatch(fetchSearchUsers({ value, pageNumber }));
+    dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
   };
 
   return (
     <>
       {pagesArr.length !== 0 && (
         <div className="paginationContainer">
-          <span
+          <button
+            disabled={currentPage === 1 ? true : ''}
             onClick={() => {
-              dispatch(changeCurrPageArrow(1));
+              pageNumber -= 1;
               dispatch(setIsLoading(true));
-              dispatch(fetchSearchUsers());
+              dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
+              dispatch(setCurrentPage(currentPage - 1));
             }}
-            className="arrow">
+            className={`pageButton ${currentPage === 1 ? 'disabled' : ''}`}>
             {' '}
             &lt;{' '}
-          </span>
-          <span>
-            {pagesArr.map((el) => {
-              if (currentPage === el) {
-                return (
-                  <button
-                    data-page={el}
-                    className="pageNumber active"
-                    onClick={() => changePage(el)}
-                    key={el}>
-                    {el}
-                  </button>
-                );
-              } else {
-                return (
-                  <button
-                    data-page={el}
-                    className="pageNumber"
-                    onClick={() => changePage(el)}
-                    key={el}>
-                    {el}
-                  </button>
-                );
-              }
-            })}
-          </span>
-          <span
+          </button>
+
+          {pagesArr.map((el) => {
+            if (currentPage === el) {
+              return (
+                <button
+                  data-page={el}
+                  className="pageButton active"
+                  onClick={() => changePage(el)}
+                  key={el}>
+                  {el}
+                </button>
+              );
+            } else {
+              return (
+                <button
+                  data-page={el}
+                  className="pageButton"
+                  onClick={() => changePage(el)}
+                  key={el}>
+                  {el}
+                </button>
+              );
+            }
+          })}
+
+          <button
+            disabled={currentPage === 10 ? true : ''}
             onClick={() => {
-              dispatch(changeCurrPageArrow(1));
+              pageNumber += 1;
               dispatch(setIsLoading(true));
-              dispatch(fetchSearchUsers());
+              dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
+              dispatch(setCurrentPage(currentPage + 1));
             }}
-            className="arrow">
+            className={`pageButton ${currentPage === 10 ? 'disabled' : ''}`}>
             &gt;
-          </span>
+          </button>
         </div>
       )}
     </>

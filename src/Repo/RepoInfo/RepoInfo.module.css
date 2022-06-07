@@ -1,6 +1,6 @@
 .profileContainer{
     padding: 25px;
-    height: 90vh;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
