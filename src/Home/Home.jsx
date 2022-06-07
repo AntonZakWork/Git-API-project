@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../Header/Header';
 import RepoContainer from '../RepoContainer/RepoContainer';
-import Search from '../search/search';
+import Search from '../Search/Search';
 
 const Home = () => {
   return (
     <div>
-      <Search />
-      <Header />
+      {/* <Search /> */}
+
       <RepoContainer />
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from './Header.module.css';
 const Header = () => {
+  debugger;
   const { currentRequest } = useSelector((state) => state.search);
   return (
     <div>

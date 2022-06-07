@@ -1,11 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { setCurrentProfileURL, setIsLoading } from '../redux/Slices/SearchSlice';
+import { useNavigate } from 'react-router-dom';
+import { reset, setCurrentProfileURL, setIsLoading } from '../redux/Slices/SearchSlice';
 import styles from './repoCard.module.css';
 import image from '../assets/star.png';
 
 const RepoCard = ({ repos }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
     <div>
@@ -19,16 +20,17 @@ const RepoCard = ({ repos }) => {
         {repos.map((el) => (
           <>
             <div
+              key={el.url}
               className={styles.container}
               onClick={() => {
+                dispatch(reset());
                 dispatch(setCurrentProfileURL(el.url));
                 dispatch(setIsLoading(true));
+                navigate(`/repo/${el.name}`);
               }}>
-              <Link className={styles.linkedProp} to={el.name}>
-                <div className={styles.prop} key={el.id}>
-                  {el.name}
-                </div>
-              </Link>
+              <div className={styles.linkedProp} key={el.id}>
+                {el.name}
+              </div>
 
               <div className={styles.prop} key={el.stargazers_count}>
                 <img className={styles.star} src={image} alt="" />
@@ -37,10 +39,8 @@ const RepoCard = ({ repos }) => {
               <div className={styles.prop} key={el.updated_at}>
                 {el.updated_at.toString().slice(0, 10)}
               </div>
-              <div className={styles.Prop} key={el.svn_url}>
-                <a className={styles.linkedProp} href={el.svn_url}>
-                  Open with GitHub
-                </a>
+              <div className={styles.linkedProp} key={el.svn_url}>
+                <a href={el.svn_url}>Open with GitHub</a>
               </div>
             </div>
           </>

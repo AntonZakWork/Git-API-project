@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   fetchInitUsers,
   fetchSearchUsers,
+  reset,
   setCurrentPage,
   setCurrentRequest,
   setSearchInput,
@@ -11,15 +13,13 @@ import styles from './search.module.css';
 const Search = () => {
   const { searchInput, currentRequest } = useSelector((state) => state.search);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const search = (payload) => {
-    if (!payload) {
-      dispatch(fetchInitUsers());
-    } else {
-      dispatch(setCurrentPage(1));
-      dispatch(setCurrentRequest(payload));
-      dispatch(fetchSearchUsers());
-    }
+  const search = (value) => {
+    dispatch(setCurrentPage(1));
+    dispatch(setCurrentRequest(value));
+    navigate(`/search/${value}/1`);
+    dispatch(fetchSearchUsers({ value }));
   };
   return (
     <div>
@@ -32,17 +32,18 @@ const Search = () => {
           value={searchInput}
           type="text"
         />
-        <button className={styles.button} onClick={() => search(searchInput)}>
+        <button
+          className={styles.button}
+          disabled={searchInput ? false : true}
+          onClick={() => search(searchInput)}>
           Search
         </button>
         {currentRequest ? (
           <button
             className={styles.button}
             onClick={() => {
-              dispatch(fetchInitUsers());
-              dispatch(setSearchInput(''));
-              dispatch(setCurrentRequest());
-              dispatch(setCurrentPage(1));
+              dispatch(reset());
+              navigate(`/`);
             }}>
             Clear
           </button>

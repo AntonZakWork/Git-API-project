@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   changeCurrPageArrow,
   fetchSearchUsers,
@@ -9,16 +10,22 @@ import {
 import './Pagination.css';
 
 const Pagination = () => {
-  const { pagesArr, currentPage } = useSelector((state) => state.search);
+  const { pagesArr, currentPage, currentRequest } = useSelector((state) => state.search);
   const dispatch = useDispatch();
+  const { value, pageNumber } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
-    window.scrollTo(0, 100);
-  });
+    debugger;
+    if (value === currentRequest && +pageNumber === currentPage) return;
+    dispatch(fetchSearchUsers({ value, pageNumber }));
+  }, []);
 
-  const changePage = (page) => {
+  const changePage = (pageNumber) => {
+    navigate(`/search/${value}/${pageNumber}`);
     dispatch(setIsLoading(true));
-    dispatch(setCurrentPage(page));
-    dispatch(fetchSearchUsers());
+    dispatch(setCurrentPage(pageNumber));
+    if (value === currentRequest && +pageNumber === currentPage) return;
+    dispatch(fetchSearchUsers({ value, pageNumber }));
   };
 
   return (
@@ -39,15 +46,23 @@ const Pagination = () => {
             {pagesArr.map((el) => {
               if (currentPage === el) {
                 return (
-                  <span className="pageNumber active" onClick={() => changePage(el)} key={el}>
+                  <button
+                    data-page={el}
+                    className="pageNumber active"
+                    onClick={() => changePage(el)}
+                    key={el}>
                     {el}
-                  </span>
+                  </button>
                 );
               } else {
                 return (
-                  <span className="pageNumber" onClick={() => changePage(el)} key={el}>
+                  <button
+                    data-page={el}
+                    className="pageNumber"
+                    onClick={() => changePage(el)}
+                    key={el}>
                     {el}
-                  </span>
+                  </button>
                 );
               }
             })}

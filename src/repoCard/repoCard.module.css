@@ -24,9 +24,10 @@
 .linkedProp {
     color: rgba(33, 150, 243, 1);
     text-decoration: none;
+    font-weight: bold;
 }
 .linkedProp:hover {
-    font-weight: bold;
+    text-decoration: underline;
 }
 .star{
     position:absolute;
