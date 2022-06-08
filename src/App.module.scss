@@ -1,9 +1,9 @@
-
+@import './scss/variables.scss';
 .appContainer {
     padding: 10px;
     height:100%;
     width: 95%;
     margin:20px;
-    background-color: rgb(248, 245, 81)
+    background-color: $yellowColor
 }
 

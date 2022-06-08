@@ -5,11 +5,14 @@
     grid-template-columns: 1fr 1fr;
     justify-items: center;
 }
-.returnButton{
+.repoButtons{
     padding-top: 15px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: block;
     margin: 0 auto;
-    text-align: center;
+    text-align: center; */
 }
 
 .avatar {
@@ -18,11 +21,24 @@
     height:300px;
 }
 
-.backButton{
-    height: 30px;
-    width: 100px;
-    font-size: 14px;
-}
+    .button{
+        margin-left: 5px;
+        cursor: pointer;
+        background-color: white;
+        border: 1px solid rgba(33, 150, 243, 1);
+      border-radius: 7px;
+      color: rgba(33, 150, 243, 1);
+      padding: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .button:hover{
+    
+        box-shadow: 0 0 5px rgba(33, 150, 243, 1);;
+    }
+
 .repoInfo {
     margin: 10px;
     position:relative;

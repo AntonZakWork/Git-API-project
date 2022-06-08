@@ -1,4 +1,4 @@
-import styles from './App.module.css';
+import styles from './App.module.scss';
 
 import Repo from './Repo/Repo';
 import { Route, Routes } from 'react-router-dom';

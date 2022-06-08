@@ -2,9 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchData = createAsyncThunk(
   'search/fetchData',
-  async (payload, { dispatch, getState }) => {
-    dispatch(setIsLoading(true));
+  async (payload, { dispatch, getState, rejectWithValue }) => {
+    debugger;
     const state = getState();
+    dispatch(setIsLoading(true));
+
     const baseGit = 'https://api.github.com/';
     switch (payload.type) {
       default: {
@@ -34,10 +36,15 @@ export const fetchData = createAsyncThunk(
         }
         break;
       case 'FETCH_REPO': {
-        const response = await fetch(`${baseGit}repos/${payload.author}/${payload.repo}`);
-        const data = await response.json();
-        dispatch(setRepoData(data));
-        dispatch(setIsLoading(false));
+        try {
+          const response = await fetch(`${baseGit}repos/${payload.author}/${payload.repo}`);
+          if (!response.ok) throw new Error('Something crashed :(');
+          const data = await response.json();
+          dispatch(setRepoData(data));
+          dispatch(setIsLoading(false));
+        } catch (error) {
+          return rejectWithValue(error.message);
+        }
       }
     }
   },
@@ -60,11 +67,11 @@ const initialState = {
   currentPage: 1,
   pagesArr: [],
   isLoading: true,
-  currentProfileURL: '',
   repoData: [],
   currentProfileName: '',
   showPopup: false,
   contributorsData: [],
+  error: '',
 };
 
 export const searchSlice = createSlice({
@@ -102,10 +109,6 @@ export const searchSlice = createSlice({
     setIsLoading(state, action) {
       state.isLoading = action.payload;
     },
-    setCurrentProfileURL(state, action) {
-      state.currentProfileURL = action.payload;
-    },
-
     setRepoData(state, action) {
       state.repoData = action.payload;
     },
@@ -119,6 +122,16 @@ export const searchSlice = createSlice({
       state.contributorsData = action.payload;
     },
   },
+  extraReducers: {
+    [fetchData.pending]: (state) => {
+      state.error = '';
+    },
+    [fetchData.fulfilled]: (state) => {},
+    [fetchData.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+  },
 });
 
 export const {
@@ -129,7 +142,6 @@ export const {
   setTotalReposCount,
   setCurrentPage,
   setPagesArr,
-  setCurrentProfileURL,
   setIsLoading,
   setRepoData,
   setCurrentProfileName,

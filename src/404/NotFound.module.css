@@ -14,3 +14,13 @@
 
     box-shadow: 0 0 5px rgba(33, 150, 243, 1);;
 }
+
+
+.notFoundContainer div {
+    font-size: 40px;
+    padding: 25px;
+}
+
+button {
+    margin-left: 15px;
+}

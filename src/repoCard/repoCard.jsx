@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { reset, setCurrentProfileURL, setIsLoading } from '../redux/Slices/SearchSlice';
+import { setIsLoading } from '../redux/Slices/SearchSlice';
 import styles from './repoCard.module.css';
 import image from '../assets/star.png';
 
@@ -18,8 +18,6 @@ const RepoCard = ({ repos }) => {
                 key={el.url}
                 className={styles.container}
                 onClick={() => {
-                  dispatch(reset());
-                  dispatch(setCurrentProfileURL(el.url));
                   dispatch(setIsLoading(true));
                   navigate(`/repo/${el.full_name}`);
                 }}>

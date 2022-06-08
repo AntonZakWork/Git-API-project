@@ -13,6 +13,7 @@ const RepoContainer = () => {
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  debugger;
   useEffect(() => {
     if (value === currentRequest && +pageNumber === currentPage) return;
     if (!value) {
