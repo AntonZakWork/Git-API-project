@@ -20,7 +20,6 @@ const Pagination = () => {
   }, []);
 
   const changePage = (pageNumber) => {
-    debugger;
     navigate(`/search/${value}/${pageNumber}`);
     dispatch(setIsLoading(true));
     dispatch(setCurrentPage(pageNumber));
@@ -35,7 +34,6 @@ const Pagination = () => {
           <button
             disabled={+currentPage === 1 ? true : ''}
             onClick={() => {
-              debugger;
               pageNumber -= 1;
               dispatch(setIsLoading(true));
               dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
@@ -73,7 +71,6 @@ const Pagination = () => {
           <button
             disabled={+currentPage === pagesArr.length ? true : ''}
             onClick={() => {
-              debugger;
               pageNumber += 1;
               dispatch(setIsLoading(true));
               dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));

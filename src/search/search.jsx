@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
-  fetchData,
   reset,
   setCurrentRequest,
   setSearchInput,
@@ -16,10 +15,9 @@ const Search = () => {
 
   const search = (value) => {
     debugger;
-    // dispatch(fetchData({ type: 'FETCH_USERS', value }));
     dispatch(setSearchInput(''));
     dispatch(setCurrentPage(1));
-    dispatch(setCurrentRequest(value));
+    // dispatch(setCurrentRequest(value));
     navigate(`/search/${value}/1`);
   };
   return (

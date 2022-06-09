@@ -9,6 +9,7 @@ import Spinner from '../Spinner/Spinner';
 import styles from './RepoContainer.module.css';
 
 const RepoContainer = () => {
+  debugger;
   const { currentRequest, repos, isLoading, currentPage, urlError } = useSelector(
     (state) => state.search,
   );
@@ -17,7 +18,6 @@ const RepoContainer = () => {
   const navigate = useNavigate();
   let requestChecker = currentRequest === value;
   let pageChecker = currentPage === +pageNumber;
-  debugger;
   useEffect(() => {
     debugger;
     if (urlError) {
