@@ -3,55 +3,64 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import Pagination from '../Pagination/Pagination';
-import { fetchData, setCurrentPage, setCurrentRequest } from '../redux/Slices/SearchSlice';
+import {
+  fetchData,
+  reset,
+  setCurrentPage,
+  setCurrentRequest,
+  setIsChangedWithArrows,
+} from '../redux/Slices/SearchSlice';
 import RepoCard from '../repoCard/repoCard';
 import Spinner from '../Spinner/Spinner';
 import styles from './RepoContainer.module.css';
 
 const RepoContainer = () => {
-  debugger;
-  const { currentRequest, repos, isLoading, currentPage, urlError } = useSelector(
-    (state) => state.search,
-  );
+  const { currentRequest, repos, isLoading, currentPage, urlError, isChangedWithArrows } =
+    useSelector((state) => state.search);
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let requestChecker = currentRequest === value;
   let pageChecker = currentPage === +pageNumber;
   useEffect(() => {
-    debugger;
     if (urlError) {
       navigate('/page_not_found');
       return;
     }
-    if (pageNumber != currentPage) {
+    if (pageNumber != currentPage && !isChangedWithArrows) {
       dispatch(setCurrentPage(pageNumber));
     }
-
+    dispatch(setIsChangedWithArrows(false));
     dispatch(setCurrentRequest(value));
+
     dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
-    // pageNumber <= 10 ? dispatch(setCurrentPage(pageNumber)) : navigate('*');
+    return () => {
+      dispatch(reset());
+    };
   }, [requestChecker, pageChecker]);
 
   return (
     <div>
       <Header />
-      <div className={styles.header}>
-        <h4>Repo name</h4>
-        <h4>Stars count</h4>
-        <h4>Updated at:</h4>
-        <h4>GitHub link</h4>
+      <div className={styles.table}>
+        <div className={styles.header}>
+          <h3>Repo name</h3>
+          <h3>Stars count</h3>
+          <h3>Updated at:</h3>
+          <h3>GitHub link</h3>
+        </div>
+        {isLoading ? (
+          <div className={styles.loaderContainer}>
+            <Spinner />
+          </div>
+        ) : (
+          <div className={styles.cardsWrapper}>
+            <RepoCard repos={repos} />
+
+            {value ? <Pagination /> : ''}
+          </div>
+        )}
       </div>
-      {isLoading ? (
-        <div className={styles.loaderContainer}>
-          <Spinner />
-        </div>
-      ) : (
-        <div>
-          <RepoCard repos={repos} />
-          {value ? <Pagination /> : ''}
-        </div>
-      )}
     </div>
   );
 };

@@ -1,9 +1,12 @@
 @import './scss/variables.scss';
 .appContainer {
-    padding: 10px;
-    height:100%;
-    width: 95%;
-    margin:20px;
-    background-color: $yellowColor
+    margin:auto;
+    border: 1px solid #bbced3;
+    padding: 20px;
+    // height:100%;
+    // width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+   
 }
 

@@ -8,3 +8,11 @@
     height:480px;
     max-height: 80vh;
 }
+
+.table{
+    margin-top: 10px;
+    border: 1px solid #bbced3;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+}

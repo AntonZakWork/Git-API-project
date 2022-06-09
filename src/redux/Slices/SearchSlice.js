@@ -2,49 +2,51 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchData = createAsyncThunk(
   'search/fetchData',
-  async (payload, { dispatch, getState, rejectWithValue }) => {
+  async (payload, { dispatch, rejectWithValue }) => {
     dispatch(setIsLoading(true));
 
     const baseGit = 'https://api.github.com/';
     switch (payload.type) {
       default: {
         console.log('error');
-        break;
+        return;
       }
-      case 'FETCH_USERS':
-        {
-          let filter = 'in:name';
-          if (!payload.pageNumber) {
-            payload.pageNumber = 1;
-          }
-          if (!payload.value) {
-            payload.value = '';
-            filter = 'stars%3A%3E0';
-          }
-          const response = await fetch(
-            `${baseGit}search/repositories?q=${`${payload.value}${filter}`}&sort=stars&order=desc&page=${
-              payload.pageNumber
-            }&per_page=10`,
-            { headers: { Authorization: 'Token $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' } },
-          );
-
-          const data = await response.json();
-          debugger;
-          dispatch(setTotalReposCount(data.total_count));
-          dispatch(setPagesArr());
-
-          dispatch(setRepos(data.items));
-          dispatch(setIsLoading(false));
+      case 'FETCH_USERS': {
+        let filter = 'in:name';
+        if (!payload.pageNumber) {
+          payload.pageNumber = 1;
         }
-        break;
+        if (!payload.value) {
+          payload.value = '';
+          filter = 'stars%3A%3E0';
+        }
+        const response = await fetch(
+          `${baseGit}search/repositories?q=${`${payload.value}${filter}`}&sort=stars&order=desc&page=${
+            payload.pageNumber
+          }&per_page=10`,
+          // { headers: { Authorization: `Token ${process.env.REACT_APP_GIT_API_KEY}` } },
+        );
+
+        const data = await response.json();
+
+        dispatch(setTotalReposCount(data.total_count));
+        dispatch(setPagesArr());
+        dispatch(setRepos(data.items));
+        dispatch(setIsLoading(false));
+        return;
+      }
+
       case 'FETCH_REPO': {
         try {
           const response = await fetch(`${baseGit}repos/${payload.author}/${payload.repo}`);
-          if (!response.ok) throw new Error('Something crashed :(');
+
           const data = await response.json();
+          if (!response.ok || data.message) throw new Error(data?.message || 'Unknown error');
+
           dispatch(setRepoData(data));
           dispatch(setIsLoading(false));
         } catch (error) {
+          console.log(error);
           return rejectWithValue(error.message);
         }
       }
@@ -75,6 +77,7 @@ const initialState = {
   contributorsData: [],
   urlError: '',
   error: '',
+  isChangedWithArrows: false,
 };
 
 const isInt = (value) => {
@@ -141,6 +144,9 @@ export const searchSlice = createSlice({
     setContributorsData(state, action) {
       state.contributorsData = action.payload;
     },
+    setIsChangedWithArrows(state, action) {
+      state.isChangedWithArrows = action.payload;
+    },
   },
   extraReducers: {
     [fetchData.pending]: (state) => {
@@ -168,5 +174,6 @@ export const {
   changeCurrPageArrow,
   changeShowPopup,
   setContributorsData,
+  setIsChangedWithArrows,
 } = searchSlice.actions;
 export default searchSlice.reducer;
