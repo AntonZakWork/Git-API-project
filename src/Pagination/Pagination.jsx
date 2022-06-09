@@ -14,11 +14,13 @@ const Pagination = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (value === currentRequest && +pageNumber === currentPage) return;
+    debugger;
+    if (value === currentRequest && pageNumber == currentPage) return;
     dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
   }, []);
 
   const changePage = (pageNumber) => {
+    debugger;
     navigate(`/search/${value}/${pageNumber}`);
     dispatch(setIsLoading(true));
     dispatch(setCurrentPage(pageNumber));
@@ -31,14 +33,15 @@ const Pagination = () => {
       {pagesArr.length !== 0 && (
         <div className="paginationContainer">
           <button
-            disabled={currentPage === 1 ? true : ''}
+            disabled={+currentPage === 1 ? true : ''}
             onClick={() => {
+              debugger;
               pageNumber -= 1;
               dispatch(setIsLoading(true));
               dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
-              dispatch(setCurrentPage(currentPage - 1));
+              dispatch(setCurrentPage(pageNumber - 1));
             }}
-            className={`pageButton ${currentPage === 1 ? 'disabled' : ''}`}>
+            className={`pageButton ${+currentPage === 1 ? 'disabled' : ''}`}>
             {' '}
             &lt;{' '}
           </button>
@@ -68,14 +71,15 @@ const Pagination = () => {
           })}
 
           <button
-            disabled={currentPage === 10 ? true : ''}
+            disabled={+currentPage === pagesArr.length ? true : ''}
             onClick={() => {
+              debugger;
               pageNumber += 1;
               dispatch(setIsLoading(true));
               dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
-              dispatch(setCurrentPage(currentPage + 1));
+              dispatch(setCurrentPage(pageNumber + 1));
             }}
-            className={`pageButton ${currentPage === 10 ? 'disabled' : ''}`}>
+            className={`pageButton ${+currentPage === pagesArr.length ? 'disabled' : ''}`}>
             &gt;
           </button>
         </div>

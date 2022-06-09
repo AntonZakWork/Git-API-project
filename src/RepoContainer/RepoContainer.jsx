@@ -3,26 +3,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import Pagination from '../Pagination/Pagination';
-import { fetchData, setCurrentPage } from '../redux/Slices/SearchSlice';
+import { fetchData, setCurrentPage, setCurrentRequest } from '../redux/Slices/SearchSlice';
 import RepoCard from '../repoCard/repoCard';
 import Spinner from '../Spinner/Spinner';
 import styles from './RepoContainer.module.css';
 
 const RepoContainer = () => {
-  const { currentRequest, repos, isLoading, currentPage } = useSelector((state) => state.search);
+  const { currentRequest, repos, isLoading, currentPage, urlError } = useSelector(
+    (state) => state.search,
+  );
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let requestChecker = currentRequest === value;
+  let pageChecker = currentPage === +pageNumber;
   debugger;
   useEffect(() => {
-    if (value === currentRequest && +pageNumber === currentPage) return;
-    if (!value) {
-      dispatch(fetchData({ type: 'FETCH_USERS', pageNumber }));
-    } else {
-      dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
-      pageNumber <= 10 ? dispatch(setCurrentPage(pageNumber)) : navigate('*');
+    debugger;
+    if (urlError) {
+      navigate('/page_not_found');
+      return;
     }
-  }, []);
+    if (pageNumber != currentPage) {
+      dispatch(setCurrentPage(pageNumber));
+    }
+
+    dispatch(setCurrentRequest(value));
+    dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
+    // pageNumber <= 10 ? dispatch(setCurrentPage(pageNumber)) : navigate('*');
+  }, [requestChecker, pageChecker]);
 
   return (
     <div>

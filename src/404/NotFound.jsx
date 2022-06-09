@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './NotFound.module.css';
 const NotFound = ({ error }) => {
+  const { currentPage, currentRequest } = useSelector((state) => state.search);
+  debugger;
   const navigate = useNavigate();
-  useEffect(() => {
-    navigate('/page_not_found');
-  }, []);
+  //   useEffect(() => {
+  //     navigate('/page_not_found');
+  //   }, []);
   return (
     <>
       <div className={styles.notFoundContainer}>

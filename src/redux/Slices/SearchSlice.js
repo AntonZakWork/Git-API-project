@@ -4,7 +4,6 @@ export const fetchData = createAsyncThunk(
   'search/fetchData',
   async (payload, { dispatch, getState, rejectWithValue }) => {
     debugger;
-    const state = getState();
     dispatch(setIsLoading(true));
 
     const baseGit = 'https://api.github.com/';
@@ -16,23 +15,30 @@ export const fetchData = createAsyncThunk(
       case 'FETCH_USERS':
         {
           let filter = 'in:name';
-          if (!payload.pageNumber) payload.pageNumber = 1;
+          if (!payload.pageNumber) {
+            payload.pageNumber = 1;
+          }
+          //   state.search.currentPage = payload.pageNumber;
           if (!payload.value) {
             payload.value = '';
             filter = 'stars%3A%3E0';
           }
+          //   state.search.currentRequest = payload.value;
           const response = await fetch(
             `${baseGit}search/repositories?q=${`${payload.value}${filter}`}&sort=stars&order=desc&page=${
               payload.pageNumber
             }&per_page=10`,
+            { headers: { Authorization: 'Bearer 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' } },
           );
+          debugger;
           const data = await response.json();
+
+          debugger;
+          dispatch(setTotalReposCount(data.total_count));
+          dispatch(setPagesArr());
+
           dispatch(setRepos(data.items));
           dispatch(setIsLoading(false));
-          if (state.search.pagesArr.length === 0) {
-            dispatch(setTotalReposCount(data.total_count));
-            dispatch(setPagesArr());
-          }
         }
         break;
       case 'FETCH_REPO': {
@@ -71,7 +77,19 @@ const initialState = {
   currentProfileName: '',
   showPopup: false,
   contributorsData: [],
+  urlError: '',
   error: '',
+};
+
+const isInt = (value) => {
+  debugger;
+  return (
+    !isNaN(value) &&
+    parseInt(Number(value)) == value &&
+    !isNaN(parseInt(value, 10)) &&
+    +value > 0 &&
+    +value < 11
+  );
 };
 
 export const searchSlice = createSlice({
@@ -98,9 +116,19 @@ export const searchSlice = createSlice({
       state.totalReposCount = action.payload;
     },
     setCurrentPage(state, action) {
-      state.currentPage = +action.payload;
+      if (isInt(action.payload)) {
+        debugger;
+        state.currentPage = +action.payload;
+        state.urlError = '';
+      } else {
+        debugger;
+        // state.currentPage = 1;
+        state.urlError = 'Wrong page!';
+      }
     },
     setPagesArr(state) {
+      debugger;
+      state.pagesArr = [];
       if (state.totalReposCount > 100) state.totalReposCount = 100;
       for (let i = 1; i <= Math.ceil(state.totalReposCount / 10); i++) {
         state.pagesArr.push(i);

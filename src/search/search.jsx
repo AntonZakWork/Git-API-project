@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import {
   fetchData,
   reset,
-  setCurrentPage,
   setCurrentRequest,
   setSearchInput,
+  setCurrentPage,
 } from '../redux/Slices/SearchSlice';
 import styles from './search.module.css';
 const Search = () => {
@@ -15,10 +15,12 @@ const Search = () => {
   const navigate = useNavigate();
 
   const search = (value) => {
+    debugger;
+    // dispatch(fetchData({ type: 'FETCH_USERS', value }));
+    dispatch(setSearchInput(''));
     dispatch(setCurrentPage(1));
     dispatch(setCurrentRequest(value));
     navigate(`/search/${value}/1`);
-    dispatch(fetchData({ type: 'FETCH_USERS', value }));
   };
   return (
     <div>
