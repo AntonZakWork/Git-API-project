@@ -1,0 +1,84 @@
+@import './scss/variables.scss';
+.appContainer {
+    margin:auto;
+    border: 1px solid #bbced3;
+    padding: 25px;
+   
+    // border-radius: 12px;
+}
+
+.light{
+    border-radius: 12px;  
+    div{
+        color:black;
+    }
+    .background {
+        .appContainer{
+            background-color: #fff;
+            button{
+                color: #101113;
+                }
+            .pageButton{
+                border: 1px solid #bbced3;
+                &:hover{
+                    box-shadow: 0 0 5px rgba(33, 150, 243, 1);
+            }
+                &.active{
+                    border: 2px solid #F1FCFF;
+                    box-shadow: 0 0 5px rgba(33, 150, 243, 1);
+                }
+            }
+        }
+        border-radius: 12px;
+    background-color: #F1FCFF;
+}
+button{
+    background-color: #fff;  
+}
+}
+
+.dark{
+    border-radius: 12px;
+    .appContainer{
+        background-color: #101113; 
+            div, button, button_disabled, input{
+            background-color: #101113; 
+            color: white;
+            };
+            .pageButton{ background-color: #373A40;
+                border:none;
+                &:hover{
+                        background-color: #F1FCFF;
+                        color: black;
+                        box-shadow: 0 0 5px #F1FCFF;
+                }
+                &.active{
+                    border: 1px solid #F1FCFF;
+                    box-shadow: 0 0 10px #F1FCFF;
+                }
+        }     
+    }
+    div{
+        color: #101113;
+        background-color: $dark;
+        &.container:hover{
+            background-color: #C1C2C5;
+            div{
+                background-color: #C1C2C5;
+                color: #101113;
+            }
+        }
+        &.table {
+            background-color: #373A40 ;
+            div{
+                background-color: #373A40 
+            }
+            
+        }
+    }
+    .background{
+        border-radius: 12px;
+    }
+
+}
+

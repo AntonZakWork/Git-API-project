@@ -1,0 +1,13 @@
+@import '../scss/variables';
+
+.themeButtons {
+    button{
+        border: none;
+        cursor: pointer;
+        font-size: 32px;
+        margin: -10px 0px -40px -10px;
+    }
+    .themeButtonLight{
+        background-color: $dark;
+    }
+}

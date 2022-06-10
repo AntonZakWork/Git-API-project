@@ -1,53 +1,23 @@
 .paginationContainer {
     padding-top: 10px;
-    margin: 10px auto;
+    margin: 10px auto 0px;
     display: flex;
     width: 500px;
     justify-content:space-around;
     
 }
 
-.pageNumber {
-    padding: 5px;
-}
 .pageNumber:hover {
     cursor: pointer;
     font-weight: 700;
 }
 
 
-.arrow:hover {
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .pageButton{
-    background-color: white;
-    cursor: pointer;
-    min-width: 32px;
-    border: 1px solid #bbced3;
+  cursor: pointer;
+  min-width: 32px;
   border-radius: 7px;
   padding: 5px;
-  text-align: center;
-  text-decoration: none;
-
   font-size: 16px;
- &:hover{
-    background-color: #F1FCFF;
-    // font-weight: bold;
- }
- &.active{font-weight: bold; 
-    border: 1px solid #bbced3;
-    background-color: #F1FCFF;
-    box-shadow: 0 0 5px rgba(33, 150, 243, 1);
 }
-}
-.pageButton.disabled{
-    border: 1px solid rgba(33, 150, 243, 0.5);
-    color: rgba(33, 150, 243, 0.5);
-}
-.pageButton.disabled:hover{
-cursor: not-allowed;
-box-shadow: none;
-color: rgba(33, 150, 243, 0.5);
-}
+

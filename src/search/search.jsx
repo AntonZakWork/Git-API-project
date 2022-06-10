@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { setSearchInput, setCurrentPage, setCurrentRequest } from '../redux/Slices/SearchSlice';
-import styles from './search.module.scss';
+import './search.scss';
 const Search = () => {
   const { searchInput } = useSelector((state) => state.search);
   const { value } = useParams();
@@ -17,17 +17,17 @@ const Search = () => {
   };
   return (
     <div>
-      <div className={styles.searchBar}>
+      <div className="searchBar">
         <form action="" onSubmit={(e) => e.preventDefault()}>
-          <div className={styles.inputContainer}>
+          <div className="inputContainer">
             <button
-              className={searchInput ? `${styles.button}` : `${styles.button_disabled}`}
+              className={searchInput ? `button` : `button_disabled`}
               disabled={searchInput ? false : true}
               onClick={() => search(searchInput)}>
               {'\u{1F50D}'}
             </button>
             <input
-              className={styles.input}
+              className="input"
               onChange={(e) => {
                 dispatch(setSearchInput(e.target.value));
               }}
@@ -36,7 +36,7 @@ const Search = () => {
             />
             {searchInput ? (
               <button
-                className={styles.button}
+                className="button"
                 onClick={() => {
                   dispatch(setSearchInput(''));
                 }}>

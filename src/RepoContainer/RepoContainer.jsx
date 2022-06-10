@@ -12,7 +12,7 @@ import {
 } from '../redux/Slices/SearchSlice';
 import RepoCard from '../repoCard/repoCard';
 import Spinner from '../Spinner/Spinner';
-import styles from './RepoContainer.module.css';
+import './RepoContainer.scss';
 
 const RepoContainer = () => {
   const { currentRequest, repos, isLoading, currentPage, urlError, isChangedWithArrows } =
@@ -42,25 +42,24 @@ const RepoContainer = () => {
   return (
     <div>
       <Header />
-      <div className={styles.table}>
-        <div className={styles.header}>
+      <div className="table">
+        <div className="header">
           <h3>Repo name</h3>
           <h3>Stars count</h3>
           <h3>Updated at:</h3>
           <h3>GitHub link</h3>
         </div>
         {isLoading ? (
-          <div className={styles.loaderContainer}>
+          <div className="loaderContainer">
             <Spinner />
           </div>
         ) : (
-          <div className={styles.cardsWrapper}>
+          <div className="cardsWrapper">
             <RepoCard repos={repos} />
-
-            {value ? <Pagination /> : ''}
           </div>
         )}
       </div>
+      {value ? <Pagination /> : ''}
     </div>
   );
 };

@@ -78,6 +78,7 @@ const initialState = {
   urlError: '',
   error: '',
   isChangedWithArrows: false,
+  theme: 'dark',
 };
 
 const isInt = (value) => {
@@ -147,6 +148,9 @@ export const searchSlice = createSlice({
     setIsChangedWithArrows(state, action) {
       state.isChangedWithArrows = action.payload;
     },
+    toggleTheme(state) {
+      state.theme === 'light' ? (state.theme = 'dark') : (state.theme = 'light');
+    },
   },
   extraReducers: {
     [fetchData.pending]: (state) => {
@@ -175,5 +179,6 @@ export const {
   changeShowPopup,
   setContributorsData,
   setIsChangedWithArrows,
+  toggleTheme,
 } = searchSlice.actions;
 export default searchSlice.reducer;

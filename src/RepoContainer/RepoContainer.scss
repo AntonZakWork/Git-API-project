@@ -1,8 +1,11 @@
 .header {
     margin-left: 10px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-
+    grid-template-columns: 4fr 3fr 3fr 2fr;
+   border-radius: 12px;
+}
+.header :nth-child(2){
+    margin-left: -20px;
 }
 .loaderContainer{
     height:480px;
@@ -12,7 +15,7 @@
 .table{
     margin-top: 10px;
     border: 1px solid #bbced3;
-    border-radius: 16px;
+    // border-radius: 16px;
     display: flex;
     flex-direction: column;
 }

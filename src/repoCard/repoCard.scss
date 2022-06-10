@@ -1,17 +1,14 @@
 .container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 4fr 3fr 3fr 2fr;
     border-top: 1px solid #E0E7ED;
     padding: 10px;
-    background-color: white;
     cursor:pointer;
 }
-.container:last-child{
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-}
+
 .container:hover{
-    background-color: rgba(241, 252, 255, 1);
+    background-color: #C1C2C5;
+    color:#101113;
 }
 
 .prop {
@@ -38,5 +35,4 @@
 }
 .star:hover {
     transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
 }

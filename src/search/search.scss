@@ -2,7 +2,7 @@
     display:flex;
     justify-content:flex-end;
     width: 100%;
-    margin:20px auto 0;
+    margin:0px auto 5px;
 }
 .input{
     outline: none;
@@ -11,15 +11,15 @@
     width:380px;
     height:45px;
     margin-right: 5px;
-    border-radius: 5px;
+    // border-radius: 5px;
 }
 .inputContainer{
     border: 1px solid #bbced3;
-    border-radius: 8px;
+    // border-radius: 8px;
     display:flex;
     width: 400px;
     &:hover{
-        box-shadow: 0 0 10px #bbced3;
+    box-shadow: 0 0 10px #bbced3;
     }
 }
 
@@ -44,6 +44,6 @@
   font-size: 28px;
 
   &:last-child:hover{
-        color: rgba(33, 150, 243, 1);;
+        color: rgb(231, 130, 147);
       }
 }
