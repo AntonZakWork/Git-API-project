@@ -4,52 +4,25 @@ export const fetchData = createAsyncThunk(
   'search/fetchData',
   async (payload, { dispatch, rejectWithValue }) => {
     dispatch(setIsLoading(true));
-
-    const baseGit = 'https://api.github.com/';
-    switch (payload.type) {
-      default: {
-        console.log('error');
-        return;
-      }
-      case 'FETCH_USERS': {
-        let filter = 'in:name';
-        if (!payload.pageNumber) {
-          payload.pageNumber = 1;
-        }
-        if (!payload.value) {
-          payload.value = '';
-          filter = 'stars%3A%3E0';
-        }
-        const response = await fetch(
-          `${baseGit}search/repositories?q=${`${payload.value}${filter}`}&sort=stars&order=desc&page=${
-            payload.pageNumber
-          }&per_page=10`,
-          // { headers: { Authorization: `Token ${process.env.REACT_APP_GIT_API_KEY}` } },
-        );
-
-        const data = await response.json();
-
-        dispatch(setTotalReposCount(data.total_count));
-        dispatch(setPagesArr());
-        dispatch(setRepos(data.items));
-        dispatch(setIsLoading(false));
-        return;
-      }
-
-      case 'FETCH_REPO': {
-        try {
-          const response = await fetch(`${baseGit}repos/${payload.author}/${payload.repo}`);
-
-          const data = await response.json();
-          if (!response.ok || data.message) throw new Error(data?.message || 'Unknown error');
-
-          dispatch(setRepoData(data));
-          dispatch(setIsLoading(false));
-        } catch (error) {
-          console.log(error);
-          return rejectWithValue(error.message);
-        }
-      }
+    const { type } = payload;
+    const urlObject = {
+      top_repos:
+        'https://api.github.com/search/repositories?q=stars%3A%3E0&sort=stars&order=desc&page=1&per_page=10',
+      search_repos: `https://api.github.com/search/repositories?q=${payload.value}in:name&sort=stars&order=desc&page=${payload.pageNumber}&per_page=10`,
+      repo: `https://api.github.com/repos/${payload.author}/${payload.repo}`,
+    };
+    try {
+      const response = await fetch(`${urlObject[type]}`);
+      const data = await response.json();
+      if (!response.ok || data.message) throw new Error(data?.message || 'Unknown error');
+      dispatch(setTotalReposCount(data.total_count));
+      dispatch(setPagesArr());
+      dispatch(setRepos(data.items));
+      dispatch(setRepoData(data));
+      dispatch(setIsLoading(false));
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.message);
     }
   },
 );
@@ -99,6 +72,8 @@ export const searchSlice = createSlice({
       state.searchInput = '';
       state.currentPage = 1;
       state.currentRequest = '';
+      state.error = '';
+      state.urlError = '';
     },
     setSearchInput(state, action) {
       state.searchInput = action.payload;
@@ -119,7 +94,6 @@ export const searchSlice = createSlice({
         state.currentPage = +action.payload;
         state.urlError = '';
       } else {
-        // state.currentPage = 1;
         state.urlError = 'Wrong page!';
       }
     },
@@ -150,6 +124,7 @@ export const searchSlice = createSlice({
     },
     toggleTheme(state) {
       state.theme === 'light' ? (state.theme = 'dark') : (state.theme = 'light');
+      localStorage.setItem('storedTheme', state.theme);
     },
   },
   extraReducers: {

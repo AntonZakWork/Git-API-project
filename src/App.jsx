@@ -10,21 +10,20 @@ import ThemeButton from './ThemeButton/ThemeButton';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const { theme } = useSelector((state) => state.search);
+  let { theme } = useSelector((state) => state.search);
+
   return (
     <>
       <div className={theme}>
-        <div className="background">
-          <div className="appContainer">
-            <ThemeButton />
-            <Search />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/repo/:author/:repo" element={<Repo />} />
-              <Route path="/search/:value/:pageNumber" element={<RepoContainer />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
+        <div className="appContainer">
+          <ThemeButton />
+          <Search />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/repo/:author/:repo" element={<Repo />} />
+            <Route path="/search/:value/:pageNumber" element={<RepoContainer />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
       </div>
     </>

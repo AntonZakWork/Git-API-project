@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContributors } from '../redux/Slices/SearchSlice';
-import styles from './popup.module.css';
+import './popup.scss';
 const Popup = ({ contributors_url }) => {
   const { contributorsData } = useSelector((state) => state.search);
   const dispatch = useDispatch();
@@ -15,9 +15,9 @@ const Popup = ({ contributors_url }) => {
         <div>
           {contributorsData.map((el) => {
             return (
-              <div className={styles.container}>
-                <img className={styles.avatarThumbnail} src={el.avatar_url} alt="" />
-                <a className={styles.popupLink} rel="noreferrer" target="_blank" href={el.html_url}>
+              <div className="popupContainer">
+                <img className="avatarThumbnail" src={el.avatar_url} alt="" />
+                <a className="popupLink" rel="noreferrer" target="_blank" href={el.html_url}>
                   {el.login}
                 </a>
               </div>

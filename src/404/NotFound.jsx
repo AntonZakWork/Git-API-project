@@ -1,8 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { fetchData, reset } from '../redux/Slices/SearchSlice';
 import styles from './NotFound.module.css';
 const NotFound = ({ error }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -12,7 +15,9 @@ const NotFound = ({ error }) => {
         <button
           className={styles.returnButton}
           onClick={() => {
-            navigate(`/`);
+            navigate('/');
+            dispatch(reset());
+            dispatch(fetchData({ type: 'top_repos' }));
           }}>
           Back to main
         </button>

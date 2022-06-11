@@ -1,10 +1,8 @@
 @import './scss/variables.scss';
 .appContainer {
     margin:auto;
-    border: 1px solid #bbced3;
+    // border: 1px solid #bbced3;
     padding: 25px;
-   
-    // border-radius: 12px;
 }
 
 .light{
@@ -12,9 +10,21 @@
     div{
         color:black;
     }
-    .background {
         .appContainer{
+            .popupContainer{
+                background-color: #101113;
+                color: white;
+
+            }
             background-color: #fff;
+            .returnButton {
+                background-color: #101113;
+                color: white;
+                &:hover{
+                    cursor:pointer;
+                    box-shadow: 0 0 5px #101113;
+                }
+            }
             button{
                 color: #101113;
                 }
@@ -31,7 +41,7 @@
         }
         border-radius: 12px;
     background-color: #F1FCFF;
-}
+
 button{
     background-color: #fff;  
 }
@@ -41,6 +51,18 @@ button{
     border-radius: 12px;
     .appContainer{
         background-color: #101113; 
+        .returnButton {
+            background-color: white;
+            color:#101113;
+            &:hover{
+                box-shadow: 0 0 5px #F1FCFF;
+                cursor:pointer;
+            }
+        }
+        .popupContainer{
+            background-color: #F1FCFF;
+            color: #101113;
+        }
             div, button, button_disabled, input{
             background-color: #101113; 
             color: white;

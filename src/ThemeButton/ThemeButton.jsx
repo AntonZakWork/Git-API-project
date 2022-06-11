@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from '../redux/Slices/SearchSlice';
 import './ThemeButton.scss';
 const ThemeButton = () => {
-  const { theme } = useSelector((state) => state.search);
+  let { theme } = useSelector((state) => state.search);
+
   const dispatch = useDispatch();
+
   return (
     <>
       <div className="themeButtons">

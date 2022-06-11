@@ -13,15 +13,16 @@ const Search = () => {
   }, []);
   const search = (value) => {
     dispatch(setCurrentPage(1));
+    dispatch(setCurrentRequest(value));
     navigate(`/search/${value}/1`);
   };
   return (
     <div>
       <div className="searchBar">
         <form action="" onSubmit={(e) => e.preventDefault()}>
-          <div className="inputContainer">
+          <div tabIndex="0" className="inputContainer">
             <button
-              className={searchInput ? `button` : `button_disabled`}
+              className="button"
               disabled={searchInput ? false : true}
               onClick={() => search(searchInput)}>
               {'\u{1F50D}'}

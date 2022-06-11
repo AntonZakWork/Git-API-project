@@ -3,41 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import Pagination from '../Pagination/Pagination';
-import {
-  fetchData,
-  reset,
-  setCurrentPage,
-  setCurrentRequest,
-  setIsChangedWithArrows,
-} from '../redux/Slices/SearchSlice';
+import { fetchData, setCurrentPage, setCurrentRequest } from '../redux/Slices/SearchSlice';
 import RepoCard from '../repoCard/repoCard';
 import Spinner from '../Spinner/Spinner';
 import './RepoContainer.scss';
 
 const RepoContainer = () => {
-  const { currentRequest, repos, isLoading, currentPage, urlError, isChangedWithArrows } =
-    useSelector((state) => state.search);
+  const { repos, isLoading, urlError, error } = useSelector((state) => state.search);
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let requestChecker = currentRequest === value;
-  let pageChecker = currentPage === +pageNumber;
   useEffect(() => {
-    if (urlError) {
+    if (urlError || error) {
       navigate('/page_not_found');
-      return;
     }
-    if (pageNumber != currentPage && !isChangedWithArrows) {
+  });
+  useEffect(() => {
+    if (value) {
+      dispatch(setCurrentRequest(value));
       dispatch(setCurrentPage(pageNumber));
+      dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
+    } else {
+      dispatch(fetchData({ type: 'top_repos' }));
     }
-    dispatch(setIsChangedWithArrows(false));
-    dispatch(setCurrentRequest(value));
-
-    dispatch(fetchData({ type: 'FETCH_USERS', value, pageNumber }));
-    return () => {
-      dispatch(reset());
-    };
-  }, [requestChecker, pageChecker]);
+  }, []);
 
   return (
     <div>
