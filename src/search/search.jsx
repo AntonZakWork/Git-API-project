@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { setSearchInput, setCurrentPage, setCurrentRequest } from '../redux/Slices/SearchSlice';
+import {
+  setSearchInput,
+  setCurrentPage,
+  setCurrentRequest,
+  fetchContributors,
+  fetchData,
+} from '../redux/Slices/SearchSlice';
 import './search.scss';
 const Search = () => {
   const { searchInput } = useSelector((state) => state.search);
@@ -12,8 +18,11 @@ const Search = () => {
     if (!value) dispatch(setCurrentRequest(''));
   }, []);
   const search = (value) => {
+    debugger;
     dispatch(setCurrentPage(1));
     dispatch(setCurrentRequest(value));
+    const pageNumber = 1;
+    dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
     navigate(`/search/${value}/1`);
   };
   return (
@@ -23,7 +32,7 @@ const Search = () => {
           <div tabIndex="0" className="inputContainer">
             <button
               className="button"
-              disabled={searchInput ? false : true}
+              //   disabled={searchInput ? false : true}
               onClick={() => search(searchInput)}>
               {'\u{1F50D}'}
             </button>

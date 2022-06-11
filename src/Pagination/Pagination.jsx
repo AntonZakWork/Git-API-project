@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  fetchData,
-  setCurrentPage,
-  setIsChangedWithArrows,
-  setIsLoading,
-} from '../redux/Slices/SearchSlice';
+import { fetchData, setCurrentPage } from '../redux/Slices/SearchSlice';
 import './Pagination.scss';
 
 const Pagination = () => {
@@ -35,7 +30,6 @@ const Pagination = () => {
               dispatch(setCurrentPage(pageNumber));
               navigate(`/search/${currentRequest}/${pageNumber}`);
               dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
-              dispatch(setIsChangedWithArrows(true));
             }}
             className={`pageButton ${+currentPage === 1 ? 'disabled' : ''}`}>
             {' '}
@@ -73,7 +67,6 @@ const Pagination = () => {
               dispatch(setCurrentPage(pageNumber));
               navigate(`/search/${currentRequest}/${pageNumber}`);
               dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
-              dispatch(setIsChangedWithArrows(true));
             }}
             className={`pageButton ${+currentPage === pagesArr.length ? 'disabled' : ''}`}>
             &gt;

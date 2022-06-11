@@ -13,12 +13,15 @@ const RepoContainer = () => {
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  debugger;
   useEffect(() => {
+    debugger;
     if (urlError || error) {
       navigate('/page_not_found');
     }
   });
   useEffect(() => {
+    debugger;
     if (value) {
       dispatch(setCurrentRequest(value));
       dispatch(setCurrentPage(pageNumber));

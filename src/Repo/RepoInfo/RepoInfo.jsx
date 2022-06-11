@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import NotFound from '../../404/NotFound';
@@ -10,6 +10,11 @@ const RepoInfo = () => {
   const { repoData, showPopup, currentRequest, currentPage, error } = useSelector(
     (state) => state.search,
   );
+  useEffect(() => {
+    return () => {
+      dispatch(changeShowPopup(false));
+    };
+  }, []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -75,7 +80,7 @@ const RepoInfo = () => {
             <div className="repoInfo">
               <b
                 onClick={() => {
-                  dispatch(changeShowPopup());
+                  showPopup ? dispatch(changeShowPopup(false)) : dispatch(changeShowPopup(true));
                 }}>
                 Top contributors
               </b>

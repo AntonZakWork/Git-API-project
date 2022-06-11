@@ -5,6 +5,8 @@
     margin:-10px auto 0px;
 }
 .input{
+    font-family: "Inconsolata";
+    cursor:pointer;
     z-index: 2;
   position: absolute;
     background: transparent;
@@ -22,6 +24,7 @@
   }
 
 .inputContainer{
+  
     position:relative;
     border: 1px solid #bbced3;
     border-radius: 100vh;
@@ -29,9 +32,7 @@
     width: 50px;
     overflow:hidden;
     transition: width 450ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    &:hover{
-        box-shadow: 0 0 6px black;
-    }
+  
     &:focus-within{
         width: 400px;
         margin-bottom: -3px;

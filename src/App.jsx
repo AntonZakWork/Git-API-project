@@ -7,10 +7,16 @@ import Search from './Search/Search';
 import RepoContainer from './RepoContainer/RepoContainer';
 import NotFound from './404/NotFound';
 import ThemeButton from './ThemeButton/ThemeButton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTheme } from './redux/Slices/SearchSlice';
 
 function App() {
-  let { theme } = useSelector((state) => state.search);
+  const dispatch = useDispatch();
+  let theme = useSelector((state) => state.search.theme);
+
+  if (localStorage.getItem('theme') === 'light') {
+    dispatch(setTheme('light'));
+  }
 
   return (
     <>

@@ -11,6 +11,11 @@
         color:black;
     }
         .appContainer{
+            .inputContainer{
+                &:hover{
+                    box-shadow: 0 0 6px black;
+                }
+            }
             .popupContainer{
                 background-color: #101113;
                 color: white;
@@ -50,6 +55,21 @@ button{
 .dark{
     border-radius: 12px;
     .appContainer{
+        .inputContainer{
+            &:hover{
+                box-shadow: 0 0 6px white;
+            }
+        }
+        .profileContainer{
+            background-color: #373A40;
+            div{
+                background-color: #373A40;
+                .popupContainer{
+                    background-color: #F1FCFF;
+                    color: #101113;
+                }
+            }
+        }
         background-color: #101113; 
         .returnButton {
             background-color: white;
@@ -59,10 +79,7 @@ button{
                 cursor:pointer;
             }
         }
-        .popupContainer{
-            background-color: #F1FCFF;
-            color: #101113;
-        }
+        
             div, button, button_disabled, input{
             background-color: #101113; 
             color: white;

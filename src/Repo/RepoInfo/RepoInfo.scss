@@ -1,6 +1,7 @@
 .profileContainer{
-    padding: 25px;
-    height: 80%;
+    padding: 30px;
+    min-height: 65%;
+    margin: 10px auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -35,7 +36,8 @@
     b{margin-right: 20px;}
  }
  .returnButton{
-    width:143px;
+    padding: 6px;
+    // width:143px;
     height: 45px;
     border-radius: 8px;
     margin-right: 15px;
@@ -44,7 +46,7 @@
  }
 
 .repoInfo {
-    margin: 10px;
+    margin: 0px 10px 10px;
     position:relative;
 }
 

@@ -12,6 +12,7 @@ export const fetchData = createAsyncThunk(
       repo: `https://api.github.com/repos/${payload.author}/${payload.repo}`,
     };
     try {
+      debugger;
       const response = await fetch(`${urlObject[type]}`);
       const data = await response.json();
       if (!response.ok || data.message) throw new Error(data?.message || 'Unknown error');
@@ -50,7 +51,6 @@ const initialState = {
   contributorsData: [],
   urlError: '',
   error: '',
-  isChangedWithArrows: false,
   theme: 'dark',
 };
 
@@ -113,18 +113,15 @@ export const searchSlice = createSlice({
     changeCurrPageArrow(state, action) {
       state.currentPage = state.currentPage + action.payload;
     },
-    changeShowPopup(state) {
-      state.showPopup = !state.showPopup;
+    changeShowPopup(state, action) {
+      state.showPopup = action.payload;
     },
     setContributorsData(state, action) {
       state.contributorsData = action.payload;
     },
-    setIsChangedWithArrows(state, action) {
-      state.isChangedWithArrows = action.payload;
-    },
-    toggleTheme(state) {
-      state.theme === 'light' ? (state.theme = 'dark') : (state.theme = 'light');
-      localStorage.setItem('storedTheme', state.theme);
+    setTheme(state, action) {
+      state.theme = action.payload;
+      localStorage.setItem('theme', state.theme);
     },
   },
   extraReducers: {
@@ -153,7 +150,6 @@ export const {
   changeCurrPageArrow,
   changeShowPopup,
   setContributorsData,
-  setIsChangedWithArrows,
-  toggleTheme,
+  setTheme,
 } = searchSlice.actions;
 export default searchSlice.reducer;
