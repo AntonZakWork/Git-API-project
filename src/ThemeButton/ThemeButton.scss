@@ -1,10 +1,12 @@
 @import '../scss/variables';
 
 .themeButtons {
+    
     button{
+        z-index: 5;
         border: none;
         cursor: pointer;
-        font-size: 32px;
+        font-size: 26px;
         margin: -40px 0px -40px -10px;
     }
     .themeButtonLight{

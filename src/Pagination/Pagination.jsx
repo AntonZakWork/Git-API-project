@@ -16,7 +16,7 @@ const Pagination = () => {
     navigate(`/search/${value}/${pageNumber}`);
     dispatch(setCurrentPage(pageNumber));
     if (value === currentRequest && +pageNumber === currentPage) return;
-    dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
+    dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
   };
 
   return (
@@ -29,7 +29,7 @@ const Pagination = () => {
               pageNumber = +pageNumber - 1;
               dispatch(setCurrentPage(pageNumber));
               navigate(`/search/${currentRequest}/${pageNumber}`);
-              dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
+              dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
             }}
             className={`pageButton ${+currentPage === 1 ? 'disabled' : ''}`}>
             {' '}
@@ -66,7 +66,7 @@ const Pagination = () => {
               pageNumber = +pageNumber + 1;
               dispatch(setCurrentPage(pageNumber));
               navigate(`/search/${currentRequest}/${pageNumber}`);
-              dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
+              dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
             }}
             className={`pageButton ${+currentPage === pagesArr.length ? 'disabled' : ''}`}>
             &gt;

@@ -3,36 +3,56 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import Pagination from '../Pagination/Pagination';
-import { fetchData, setCurrentPage, setCurrentRequest } from '../redux/Slices/SearchSlice';
+import {
+  fetchData,
+  setCurrentPage,
+  setCurrentRequest,
+  setPagesArr,
+  setRepos,
+  setTotalReposCount,
+} from '../redux/Slices/SearchSlice';
 import RepoCard from '../repoCard/repoCard';
 import Spinner from '../Spinner/Spinner';
 import './RepoContainer.scss';
 
 const RepoContainer = () => {
-  const { repos, isLoading, urlError, error } = useSelector((state) => state.search);
+  const { isLoading, urlError, serverError, responseTopUsers, responseSearchUsers } = useSelector(
+    (state) => state.search,
+  );
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  debugger;
+  //   useEffect(() => {
+  //     debugger;
+  //     if (urlError) navigate('/page_not_found');
+  //     if (serverError) navigate('/error');
+  //   });
   useEffect(() => {
-    debugger;
-    if (urlError || error) {
-      navigate('/page_not_found');
-    }
-  });
-  useEffect(() => {
-    debugger;
     if (value) {
       dispatch(setCurrentRequest(value));
       dispatch(setCurrentPage(pageNumber));
-      dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
+      dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
     } else {
-      dispatch(fetchData({ type: 'top_repos' }));
+      dispatch(fetchData({ type: 'responseTopUsers' }));
     }
   }, []);
+  useEffect(() => {
+    if (responseTopUsers) {
+      dispatch(setTotalReposCount(responseTopUsers.total_count));
+      dispatch(setPagesArr());
+      dispatch(setRepos(responseTopUsers.items));
+    }
+  }, [responseTopUsers]);
 
+  useEffect(() => {
+    if (responseSearchUsers) {
+      dispatch(setTotalReposCount(responseSearchUsers.total_count));
+      dispatch(setPagesArr());
+      dispatch(setRepos(responseSearchUsers.items));
+    }
+  }, [responseSearchUsers]);
   return (
-    <div>
+    <>
       <Header />
       <div className="table">
         <div className="header">
@@ -47,12 +67,12 @@ const RepoContainer = () => {
           </div>
         ) : (
           <div className="cardsWrapper">
-            <RepoCard repos={repos} />
+            <RepoCard />
           </div>
         )}
       </div>
       {value ? <Pagination /> : ''}
-    </div>
+    </>
   );
 };
 

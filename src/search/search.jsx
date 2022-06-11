@@ -5,7 +5,6 @@ import {
   setSearchInput,
   setCurrentPage,
   setCurrentRequest,
-  fetchContributors,
   fetchData,
 } from '../redux/Slices/SearchSlice';
 import './search.scss';
@@ -18,22 +17,18 @@ const Search = () => {
     if (!value) dispatch(setCurrentRequest(''));
   }, []);
   const search = (value) => {
-    debugger;
     dispatch(setCurrentPage(1));
     dispatch(setCurrentRequest(value));
     const pageNumber = 1;
-    dispatch(fetchData({ type: 'search_repos', value, pageNumber }));
+    dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
     navigate(`/search/${value}/1`);
   };
   return (
     <div>
       <div className="searchBar">
         <form action="" onSubmit={(e) => e.preventDefault()}>
-          <div tabIndex="0" className="inputContainer">
-            <button
-              className="button"
-              //   disabled={searchInput ? false : true}
-              onClick={() => search(searchInput)}>
+          <div className="inputContainer">
+            <button className="button" onClick={() => search(searchInput)}>
               {'\u{1F50D}'}
             </button>
             <input

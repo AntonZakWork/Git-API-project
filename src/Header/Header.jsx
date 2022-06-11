@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { reset } from '../redux/Slices/SearchSlice';
+import { fetchData, reset } from '../redux/Slices/SearchSlice';
+import Search from '../Search/Search';
 import './Header.scss';
 const Header = () => {
   const dispatch = useDispatch();
@@ -9,20 +10,23 @@ const Header = () => {
   const { currentRequest } = useSelector((state) => state.search);
   return (
     <div className="headerContainer">
-      {currentRequest ? <h2>Search request "{currentRequest}"</h2> : <h2>Top 10 repos</h2>}
+      <div className="headerWrapper">
+        {currentRequest ? <h2>Search request "{currentRequest}"</h2> : <h2>Top 10 repos</h2>}
+        {currentRequest ? (
+          <button
+            className="remove"
+            onClick={() => {
+              dispatch(reset());
+              dispatch(fetchData({ type: 'responseTopUsers' }));
+            }}>
+            {'\u{274C}'}
+          </button>
+        ) : (
+          ''
+        )}
+      </div>
 
-      {currentRequest ? (
-        <button
-          className="button"
-          onClick={() => {
-            dispatch(reset());
-            navigate(`/`);
-          }}>
-          {'\u{274C}'}
-        </button>
-      ) : (
-        ''
-      )}
+      <Search />
     </div>
   );
 };

@@ -2,17 +2,16 @@
     display:flex;
     justify-content:flex-end;
     width: 100%;
-    margin:-10px auto 0px;
+    margin-top: 20px;
 }
 .input{
     font-family: "Inconsolata";
     cursor:pointer;
     z-index: 2;
-  position: absolute;
+//   position: absolute;
     background: transparent;
   opacity: 0;
-  z-index: 2;
-    margin-top: 3px;
+    margin: 1px 0 2px;
     outline: none;
     border: none;
     width: 100%;
@@ -24,7 +23,8 @@
   }
 
 .inputContainer{
-  
+    margin-top: -15px;
+    margin-bottom: 10px;
     position:relative;
     border: 1px solid #bbced3;
     border-radius: 100vh;
@@ -35,7 +35,7 @@
   
     &:focus-within{
         width: 400px;
-        margin-bottom: -3px;
+        margin-bottom: 10px;
         input {
             position: relative;
             opacity: 1;
@@ -47,9 +47,7 @@
 
 .button{
     z-index: 1;
-    margin: auto 6px;
-    // margin-left:6px;
-    // margin-right: 6px;;
+    margin: 0px 7px 2px;
     border: none;
     color: rgba(33, 150, 243, 0.5);
     background-color: rgba(255,255,255,0.5);
@@ -63,3 +61,4 @@
       }
 }
 }
+

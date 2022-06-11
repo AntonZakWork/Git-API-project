@@ -3,26 +3,25 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchData = createAsyncThunk(
   'search/fetchData',
   async (payload, { dispatch, rejectWithValue }) => {
+    debugger;
     dispatch(setIsLoading(true));
-    const { type } = payload;
+    const { type, callback } = payload;
     const urlObject = {
-      top_repos:
+      responseTopUsers:
         'https://api.github.com/search/repositories?q=stars%3A%3E0&sort=stars&order=desc&page=1&per_page=10',
-      search_repos: `https://api.github.com/search/repositories?q=${payload.value}in:name&sort=stars&order=desc&page=${payload.pageNumber}&per_page=10`,
-      repo: `https://api.github.com/repos/${payload.author}/${payload.repo}`,
+      responseSearchUsers: `https://api.github.com/search/repositories?q=${payload.value}in:name&sort=stars&order=desc&page=${payload.pageNumber}&per_page=10`,
+      responseRepo: `https://api.github.com/repos/${payload.author}/${payload.repo}`,
     };
     try {
-      debugger;
       const response = await fetch(`${urlObject[type]}`);
       const data = await response.json();
       if (!response.ok || data.message) throw new Error(data?.message || 'Unknown error');
-      dispatch(setTotalReposCount(data.total_count));
-      dispatch(setPagesArr());
-      dispatch(setRepos(data.items));
-      dispatch(setRepoData(data));
+      dispatch(setResponse({ data, type }));
+      //   if (typeof callback === 'function') callback(data);
+
       dispatch(setIsLoading(false));
     } catch (error) {
-      console.log(error);
+      debugger;
       return rejectWithValue(error.message);
     }
   },
@@ -49,9 +48,12 @@ const initialState = {
   currentProfileName: '',
   showPopup: false,
   contributorsData: [],
-  urlError: '',
-  error: '',
+  urlError: null,
+  serverError: null,
   theme: 'dark',
+  responseTopUsers: null,
+  responseSearchUsers: null,
+  responseRepo: null,
 };
 
 const isInt = (value) => {
@@ -72,8 +74,11 @@ export const searchSlice = createSlice({
       state.searchInput = '';
       state.currentPage = 1;
       state.currentRequest = '';
-      state.error = '';
+      state.serverError = '';
       state.urlError = '';
+      state.responseTopUsers = null;
+      state.responseSearchUsers = null;
+      state.responseRepo = null;
     },
     setSearchInput(state, action) {
       state.searchInput = action.payload;
@@ -107,9 +112,6 @@ export const searchSlice = createSlice({
     setIsLoading(state, action) {
       state.isLoading = action.payload;
     },
-    setRepoData(state, action) {
-      state.repoData = action.payload;
-    },
     changeCurrPageArrow(state, action) {
       state.currentPage = state.currentPage + action.payload;
     },
@@ -123,6 +125,12 @@ export const searchSlice = createSlice({
       state.theme = action.payload;
       localStorage.setItem('theme', state.theme);
     },
+    setResponse(state, action) {
+      const {
+        payload: { type, data },
+      } = action;
+      state[type] = data;
+    },
   },
   extraReducers: {
     [fetchData.pending]: (state) => {
@@ -130,8 +138,9 @@ export const searchSlice = createSlice({
     },
     [fetchData.fulfilled]: (state) => {},
     [fetchData.rejected]: (state, action) => {
+      debugger;
       state.isLoading = false;
-      state.error = action.payload;
+      state.serverError = action.payload;
     },
   },
 });
@@ -145,11 +154,11 @@ export const {
   setCurrentPage,
   setPagesArr,
   setIsLoading,
-  setRepoData,
   setCurrentProfileName,
   changeCurrPageArrow,
   changeShowPopup,
   setContributorsData,
   setTheme,
+  setResponse,
 } = searchSlice.actions;
 export default searchSlice.reducer;

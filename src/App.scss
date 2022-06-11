@@ -1,12 +1,13 @@
 @import './scss/variables.scss';
 .appContainer {
     margin:auto;
+    height:100%;
     // border: 1px solid #bbced3;
     padding: 25px;
 }
 
 .light{
-    border-radius: 12px;  
+    height:100%; 
     div{
         color:black;
     }
@@ -53,7 +54,7 @@ button{
 }
 
 .dark{
-    border-radius: 12px;
+   height:100%;
     .appContainer{
         .inputContainer{
             &:hover{
@@ -101,10 +102,10 @@ button{
         color: #101113;
         background-color: $dark;
         &.container:hover{
-            background-color: #C1C2C5;
+            background-color: #101113;
             div{
-                background-color: #C1C2C5;
-                color: #101113;
+                background-color: #101113;
+                color: #C1C2C5;
             }
         }
         &.table {

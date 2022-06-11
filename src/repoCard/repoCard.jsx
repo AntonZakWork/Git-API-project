@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setIsLoading } from '../redux/Slices/SearchSlice';
 import './repoCard.scss';
 import image from '../assets/star.png';
 
-const RepoCard = ({ repos }) => {
+const RepoCard = () => {
+  const { repos } = useSelector((state) => state.search);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (

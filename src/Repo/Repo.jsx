@@ -13,7 +13,7 @@ const Repo = () => {
   const { author, repo } = useParams();
 
   useEffect(() => {
-    dispatch(fetchData({ type: 'repo', author, repo }));
+    dispatch(fetchData({ type: 'responseRepo', author, repo }));
   }, []);
 
   return (
