@@ -12,6 +12,10 @@
         color:black;
     }
         .appContainer{
+            .profileContainer{
+                background-color: #C1C2C5;
+                color: white;
+            }
             .inputContainer{
                 &:hover{
                     box-shadow: 0 0 6px black;
@@ -24,6 +28,14 @@
             }
             background-color: #fff;
             .returnButton {
+                background-color: #101113;
+                color: white;
+                &:hover{
+                    cursor:pointer;
+                    box-shadow: 0 0 5px #101113;
+                }
+            }
+            .errorButton {
                 background-color: #101113;
                 color: white;
                 &:hover{
@@ -80,7 +92,14 @@ button{
                 cursor:pointer;
             }
         }
-        
+        .errorButton {
+            background-color: white;
+            color:#101113;
+            &:hover{
+                box-shadow: 0 0 5px #F1FCFF;
+                cursor:pointer;
+            }
+        }
             div, button, button_disabled, input{
             background-color: #101113; 
             color: white;

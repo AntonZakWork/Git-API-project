@@ -15,12 +15,12 @@ const Popup = ({ contributors_url }) => {
         <div>
           {contributorsData.map((el) => {
             return (
-              <div className="popupContainer">
+              <span className="popupContainer">
                 <img className="avatarThumbnail" src={el.avatar_url} alt="" />
                 <a className="popupLink" rel="noreferrer" target="_blank" href={el.html_url}>
                   {el.login}
                 </a>
-              </div>
+              </span>
             );
           })}
         </div>

@@ -13,7 +13,7 @@ const ErrorPage = () => {
         {serverError ? <div>{serverError}</div> : <div>'Unknown error!'</div>}
         <div>
           <button
-            className="returnButton"
+            className="errorButton"
             onClick={() => {
               navigate('/');
               dispatch(reset());
@@ -21,7 +21,7 @@ const ErrorPage = () => {
             Back to main
           </button>
           <button
-            className="returnButton"
+            className="errorButton"
             onClick={() => {
               navigate(-2);
             }}>

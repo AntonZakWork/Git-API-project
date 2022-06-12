@@ -1,8 +1,8 @@
 .searchBar {
+    margin-top: -15px;
     display:flex;
     justify-content:flex-end;
     width: 100%;
-    margin-top: 20px;
 }
 .input{
     font-family: "Inconsolata";
@@ -23,7 +23,6 @@
   }
 
 .inputContainer{
-    margin-top: -15px;
     margin-bottom: 10px;
     position:relative;
     border: 1px solid #bbced3;

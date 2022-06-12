@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchData = createAsyncThunk(
   'search/fetchData',
   async (payload, { dispatch, rejectWithValue }) => {
-    debugger;
     dispatch(setIsLoading(true));
     const { type, callback } = payload;
     const urlObject = {
@@ -21,7 +20,6 @@ export const fetchData = createAsyncThunk(
 
       dispatch(setIsLoading(false));
     } catch (error) {
-      debugger;
       return rejectWithValue(error.message);
     }
   },
@@ -30,7 +28,7 @@ export const fetchData = createAsyncThunk(
 export const fetchContributors = createAsyncThunk(
   'search/Contributors',
   async (contributorsLink, { dispatch }) => {
-    const response = await fetch(`${contributorsLink}?page=1&per_page=10`);
+    const response = await fetch(`${contributorsLink}?page=1&per_page=5`);
     const data = await response.json();
     dispatch(setContributorsData(data));
   },
@@ -138,7 +136,6 @@ export const searchSlice = createSlice({
     },
     [fetchData.fulfilled]: (state) => {},
     [fetchData.rejected]: (state, action) => {
-      debugger;
       state.isLoading = false;
       state.serverError = action.payload;
     },

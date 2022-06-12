@@ -11,23 +11,22 @@ const NotFound = () => {
     <>
       <div className="notFoundContainer">
         <div>{urlError} Check if link is correct.</div>
-        <div>
-          <button
-            className="returnButton"
-            onClick={() => {
-              navigate('/');
-              dispatch(reset());
-            }}>
-            Back to main
-          </button>
-          <button
-            className="returnButton"
-            onClick={() => {
-              navigate(-2);
-            }}>
-            Back to previous page
-          </button>
-        </div>
+
+        <button
+          className="errorButton"
+          onClick={() => {
+            navigate('/');
+            dispatch(reset());
+          }}>
+          Back to main
+        </button>
+        <button
+          className="errorButton"
+          onClick={() => {
+            navigate(-2);
+          }}>
+          Back to previous page
+        </button>
       </div>
     </>
   );

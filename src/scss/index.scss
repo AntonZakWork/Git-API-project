@@ -1,5 +1,8 @@
 @import './variables.scss';
-
+@font-face {
+    font-family: 'Inconsolata';
+    src: local('Inconsolata'), url(../assets/Fonts/Inconsolata.ttf) format('truetype');
+  }
 body {
   margin: 0;
   font-family: "Inconsolata";

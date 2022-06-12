@@ -16,11 +16,7 @@ const Repo = () => {
     dispatch(fetchData({ type: 'responseRepo', author, repo }));
   }, []);
 
-  return (
-    <>
-      <div className={styles.profileWrapper}>{isLoading ? <Spinner /> : <RepoInfo />}</div>
-    </>
-  );
+  return <>{isLoading ? <Spinner /> : <RepoInfo />}</>;
 };
 
 export default Repo;

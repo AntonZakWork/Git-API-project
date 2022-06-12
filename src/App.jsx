@@ -6,7 +6,7 @@ import RepoContainer from './RepoContainer/RepoContainer';
 import NotFound from './404/NotFound';
 import ThemeButton from './ThemeButton/ThemeButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTheme } from './redux/Slices/SearchSlice';
+import { changeShowPopup, setTheme } from './redux/Slices/SearchSlice';
 
 import { useEffect } from 'react';
 import ErrorPage from './404/ErrorPage';
@@ -19,14 +19,17 @@ function App() {
     dispatch(setTheme('light'));
   }
   useEffect(() => {
-    debugger;
     if (urlError) navigate('/page_not_found');
     if (serverError) navigate('/error');
   }, [urlError, serverError]);
   return (
     <>
       <div className={theme}>
-        <div className="appContainer">
+        <div
+          onClick={() => {
+            dispatch(changeShowPopup(false));
+          }}
+          className="appContainer">
           <ThemeButton />
           <Routes>
             <Route path="/" element={<RepoContainer />} />

@@ -21,12 +21,6 @@ const RepoContainer = () => {
   );
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  //   useEffect(() => {
-  //     debugger;
-  //     if (urlError) navigate('/page_not_found');
-  //     if (serverError) navigate('/error');
-  //   });
   useEffect(() => {
     if (value) {
       dispatch(setCurrentRequest(value));

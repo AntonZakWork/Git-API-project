@@ -46,7 +46,7 @@ const RepoCard = () => {
               </div>
               <div className="linkedProp" key={el.svn_url}>
                 <a href={el.svn_url} rel="noreferrer" target="_blank">
-                  Open with GitHub{' '}
+                  Open with GitHub
                 </a>
               </div>
             </div>
