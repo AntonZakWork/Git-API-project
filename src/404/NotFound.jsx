@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { reset } from '../redux/Slices/SearchSlice';
+import { reset, resetErrors } from '../redux/Slices/SearchSlice';
 import './NotFound.scss';
 const NotFound = () => {
+  useEffect(() => {
+    dispatch(resetErrors());
+  }, []);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { urlError } = useSelector((state) => state.search);
@@ -23,7 +26,7 @@ const NotFound = () => {
         <button
           className="errorButton"
           onClick={() => {
-            navigate(-2);
+            navigate(-1);
           }}>
           Back to previous page
         </button>

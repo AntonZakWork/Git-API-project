@@ -13,15 +13,12 @@ import ErrorPage from './404/ErrorPage';
 
 function App() {
   const dispatch = useDispatch();
-  let { theme, urlError, serverError } = useSelector((state) => state.search);
-  const navigate = useNavigate();
+  let { theme } = useSelector((state) => state.search);
+
   if (localStorage.getItem('theme') === 'light') {
     dispatch(setTheme('light'));
   }
-  useEffect(() => {
-    if (urlError) navigate('/page_not_found');
-    if (serverError) navigate('/error');
-  }, [urlError, serverError]);
+
   return (
     <>
       <div className={theme}>

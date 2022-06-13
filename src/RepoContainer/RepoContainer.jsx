@@ -16,9 +16,7 @@ import Spinner from '../Spinner/Spinner';
 import './RepoContainer.scss';
 
 const RepoContainer = () => {
-  const { isLoading, urlError, serverError, responseTopUsers, responseSearchUsers } = useSelector(
-    (state) => state.search,
-  );
+  const { isLoading, responseTopUsers, responseSearchUsers } = useSelector((state) => state.search);
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import image from '../../assets/star.png';
 import Popup from '../../Popup/Popup';
-import { changeShowPopup, fetchData, reset } from '../../redux/Slices/SearchSlice';
+import { changeShowPopup, fetchData } from '../../redux/Slices/SearchSlice';
 import Search from '../../Search/Search';
 import './RepoInfo.scss';
 const RepoInfo = () => {
@@ -12,11 +12,12 @@ const RepoInfo = () => {
   const { showPopup, currentRequest, currentPage, responseRepo } = useSelector(
     (state) => state.search,
   );
+
   useEffect(() => {
     return () => {
       dispatch(changeShowPopup(false));
     };
-  }, []);
+  });
 
   return (
     <>

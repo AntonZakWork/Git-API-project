@@ -78,6 +78,10 @@ export const searchSlice = createSlice({
       state.responseSearchUsers = null;
       state.responseRepo = null;
     },
+    resetErrors(state) {
+      state.serverError = null;
+      state.urlError = null;
+    },
     setSearchInput(state, action) {
       state.searchInput = action.payload;
     },
@@ -157,5 +161,6 @@ export const {
   setContributorsData,
   setTheme,
   setResponse,
+  resetErrors,
 } = searchSlice.actions;
 export default searchSlice.reducer;
