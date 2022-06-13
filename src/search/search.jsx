@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
@@ -13,15 +13,21 @@ const Search = () => {
   const { value } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const searchRef = useRef();
   useEffect(() => {
     if (!value) dispatch(setCurrentRequest(''));
   }, []);
   const search = (value) => {
-    dispatch(setCurrentPage(1));
-    dispatch(setCurrentRequest(value));
-    const pageNumber = 1;
-    dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
-    navigate(`/search/${value}/1`);
+    console.log('inside search');
+    if (value) {
+      dispatch(setCurrentPage(1));
+      dispatch(setCurrentRequest(value));
+      const pageNumber = 1;
+      dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
+      navigate(`/search/${value}/1`);
+    } else {
+      searchRef.current.placeholder = 'Type your request!';
+    }
   };
   return (
     <div>
@@ -32,7 +38,9 @@ const Search = () => {
               {'\u{1F50D}'}
             </button>
             <input
+              ref={searchRef}
               className="input"
+              onFocus={() => (searchRef.current.placeholder = '')}
               onChange={(e) => {
                 dispatch(setSearchInput(e.target.value));
               }}
@@ -43,6 +51,7 @@ const Search = () => {
               <button
                 className="button"
                 onClick={() => {
+                  searchRef.current.focus();
                   dispatch(setSearchInput(''));
                 }}>
                 {'\u{274C}'}

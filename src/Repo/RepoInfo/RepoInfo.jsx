@@ -94,7 +94,6 @@ const RepoInfo = () => {
             <div className="repoInfo contributors">
               <b
                 onClick={(e) => {
-                  debugger;
                   e.stopPropagation();
                   showPopup ? dispatch(changeShowPopup(false)) : dispatch(changeShowPopup(true));
                 }}>

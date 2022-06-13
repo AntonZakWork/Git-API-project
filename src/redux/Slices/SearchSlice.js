@@ -118,7 +118,6 @@ export const searchSlice = createSlice({
       state.currentPage = state.currentPage + action.payload;
     },
     changeShowPopup(state, action) {
-      debugger;
       state.showPopup = action.payload;
     },
     setContributorsData(state, action) {

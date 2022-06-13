@@ -16,9 +16,17 @@ import Spinner from '../Spinner/Spinner';
 import './RepoContainer.scss';
 
 const RepoContainer = () => {
-  const { isLoading, responseTopUsers, responseSearchUsers } = useSelector((state) => state.search);
+  const { isLoading, responseTopUsers, responseSearchUsers, urlError, serverError } = useSelector(
+    (state) => state.search,
+  );
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (urlError) navigate('/page_not_found');
+    if (serverError) navigate('/error');
+  }, [urlError, serverError]);
+
   useEffect(() => {
     if (value) {
       dispatch(setCurrentRequest(value));
