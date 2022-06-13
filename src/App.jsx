@@ -24,6 +24,7 @@ function App() {
       <div className={theme}>
         <div
           onClick={() => {
+            debugger;
             dispatch(changeShowPopup(false));
           }}
           className="appContainer">
