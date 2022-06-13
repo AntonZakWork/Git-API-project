@@ -2,16 +2,18 @@
 .appContainer {
     margin:auto;
     height:100%;
-    // border: 1px solid #bbced3;
+    
     padding: 25px;
 }
 
 .light{
+    
     height:100%; 
     div{
         color:black;
     }
         .appContainer{
+            background-color: rgb(237, 238, 240);
             .profileContainer{
                 background-color: #C1C2C5;
                 color: white;
@@ -26,7 +28,7 @@
                 color: white;
 
             }
-            background-color: #fff;
+            // background-color: #fff;
             .returnButton {
                 background-color: #101113;
                 color: white;
@@ -45,6 +47,9 @@
             }
             button{
                 color: #101113;
+                }
+                .remove {
+                   background-color: rgb(237, 238, 240);
                 }
             .pageButton{
                 border: 1px solid #bbced3;
