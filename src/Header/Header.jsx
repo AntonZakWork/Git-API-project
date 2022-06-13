@@ -17,6 +17,7 @@ const Header = () => {
             className="remove"
             onClick={() => {
               dispatch(reset());
+              navigate('/');
               dispatch(fetchData({ type: 'responseTopUsers' }));
             }}>
             {'\u{274C}'}
