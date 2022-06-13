@@ -23,7 +23,7 @@ const ErrorPage = () => {
           <button
             className="errorButton"
             onClick={() => {
-              navigate(-2);
+              navigate(-3);
               dispatch(reset());
             }}>
             Back to previous page
