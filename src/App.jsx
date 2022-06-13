@@ -13,7 +13,12 @@ import ErrorPage from './404/ErrorPage';
 
 function App() {
   const dispatch = useDispatch();
-  let { theme } = useSelector((state) => state.search);
+  const navigate = useNavigate();
+  let { theme, urlError, serverError } = useSelector((state) => state.search);
+  useEffect(() => {
+    if (urlError) navigate('/page_not_found');
+    if (serverError) navigate('/error');
+  }, [urlError, serverError]);
 
   if (localStorage.getItem('theme') === 'light') {
     dispatch(setTheme('light'));
@@ -24,7 +29,6 @@ function App() {
       <div className={theme}>
         <div
           onClick={() => {
-            debugger;
             dispatch(changeShowPopup(false));
           }}
           className="appContainer">
