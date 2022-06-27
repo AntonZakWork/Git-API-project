@@ -8,14 +8,13 @@ const Popup = ({ contributors_url }) => {
   useEffect(() => {
     dispatch(fetchContributors(contributors_url));
   }, []);
-  console.log(contributorsData);
   return (
     <>
       {contributorsData.length ? (
         <div>
           {contributorsData.map((el) => {
             return (
-              <span className="popupContainer">
+              <span key={el.login} className="popupContainer">
                 <img className="avatarThumbnail" src={el.avatar_url} alt="" />
                 <a className="popupLink" rel="noreferrer" target="_blank" href={el.html_url}>
                   {el.login}

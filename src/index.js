@@ -1,6 +1,5 @@
 import React from 'react';
 import './assets/Fonts/Inconsolata.ttf';
-// import '@fontsource/inconsolata';
 import ReactDOM from 'react-dom/client';
 import '../src/scss/index.scss';
 import App from './App';

@@ -5,7 +5,23 @@
     padding: 10px;
     cursor:pointer;
 }
-
+.bookmarkAdd{
+    width: 15px;
+    margin-left: 7px;
+    &.active{
+        svg {
+            fill: blue;
+        }
+    }
+   
+    svg{
+        cursor:pointer;
+        transition: all 0.2s;
+        &:hover{
+            transform: scale(120%)
+        }
+    }
+}
 .container:hover{
     background-color: rgb(237, 238, 240);
     color:#101113;
@@ -16,9 +32,10 @@
     padding: 5px;
 }
 .linkedProp {
-    // font-weight:600;
     padding: 5px 20px 5px 5px;
     text-decoration: none;
+    display: flex;
+
     &:hover{
         text-decoration: underline;
         cursor:pointer;}

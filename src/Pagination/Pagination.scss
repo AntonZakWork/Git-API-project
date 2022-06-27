@@ -1,17 +1,14 @@
 .paginationContainer {
-    padding-top: 10px;
     margin: 10px auto 0px;
     display: flex;
     width: 500px;
     justify-content:space-around;
     
 }
-
 .pageNumber:hover {
     cursor: pointer;
     font-weight: 700;
 }
-
 
 .pageButton{
   cursor: pointer;

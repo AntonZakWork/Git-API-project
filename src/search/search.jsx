@@ -8,8 +8,11 @@ import {
   fetchData,
 } from '../redux/Slices/SearchSlice';
 import './search.scss';
+import { ReactComponent as BookmarkSVG } from '../assets/bookmarks/Bookmark.svg';
+
 const Search = () => {
   const { searchInput } = useSelector((state) => state.search);
+  const { bookmarkCount } = useSelector((state) => state.bookmark);
   const { value } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,7 +21,6 @@ const Search = () => {
     if (!value) dispatch(setCurrentRequest(''));
   }, []);
   const search = (value) => {
-    console.log('inside search');
     if (value) {
       dispatch(setCurrentPage(1));
       dispatch(setCurrentRequest(value));
@@ -32,6 +34,11 @@ const Search = () => {
   return (
     <div>
       <div className="searchBar">
+        <div className="bookmark">
+          <div className="counter">{bookmarkCount}</div>
+          <BookmarkSVG />
+        </div>
+
         <form action="" onSubmit={(e) => e.preventDefault()}>
           <div className="inputContainer">
             <button className="button" onClick={() => search(searchInput)}>

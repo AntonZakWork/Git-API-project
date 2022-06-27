@@ -16,8 +16,6 @@ export const fetchData = createAsyncThunk(
       const data = await response.json();
       if (!response.ok || data.message) throw new Error(data?.message || 'Unknown error');
       dispatch(setResponse({ data, type }));
-      //   if (typeof callback === 'function') callback(data);
-
       dispatch(setIsLoading(false));
     } catch (error) {
       return rejectWithValue(error.message);
