@@ -46,7 +46,7 @@ const initialState = {
   contributorsData: [],
   urlError: null,
   serverError: null,
-  theme: 'dark',
+  theme: 'light',
   responseTopUsers: null,
   responseSearchUsers: null,
   responseRepo: null,

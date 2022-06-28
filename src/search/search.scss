@@ -4,9 +4,10 @@
     justify-content:flex-end;
     width: 100%;
     &:focus-within{
-        .bookmark{
+        .bookmark, .homePage{
             opacity:0;
         }
+
     }
 }
 .input{
@@ -30,13 +31,15 @@
     height: 33px;
     width: 33px;
     position: relative;
-    top: 10px;
-    left: -15px;
-    background: transparent;
-    transition: transform 0.3s;
+    top: 12px;
+    left: -25px;
+    transition: transform 0.15s;
     &:hover{
-            transform: scale(110%);
+            transform: scale(105%);
         }
+    &:active{
+        transform: scale(95%);
+    }
     }
     svg{
         background: transparent;
@@ -101,4 +104,23 @@
     font-size: 12px;
     background-color: #bbced3;;
     border-radius: 100vh;
+}
+.homePage{
+    svg{
+        height: 367px;
+        width: 421px;
+    }
+    transform: scale(8.5%);
+    width: 0px;
+    height: 2px;
+    position: relative;
+    top: 10px;
+    left: -83px;
+    transition: all 0.15s;
+    &:hover{
+        transform: scale(9%);
+    }
+&:active{
+    transform: scale(7%);
+}
 }

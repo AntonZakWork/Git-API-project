@@ -15,8 +15,6 @@ const RepoInfo = () => {
 
   return (
     <>
-      <Search />
-
       <div className="profileContainer">
         <div className="avatarContainer">
           <div>

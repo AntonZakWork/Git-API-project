@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import {
   setSearchInput,
   setCurrentPage,
@@ -9,8 +9,9 @@ import {
 } from '../redux/Slices/SearchSlice';
 import './search.scss';
 import { ReactComponent as BookmarkSVG } from '../assets/bookmarks/Bookmark.svg';
-
+import { ReactComponent as HomePage } from '../assets/Icons/homepage.svg';
 const Search = () => {
+  const location = useLocation();
   const { searchInput } = useSelector((state) => state.search);
   const { bookmarkCount } = useSelector((state) => state.bookmark);
   const { value } = useParams();
@@ -34,7 +35,25 @@ const Search = () => {
   return (
     <div>
       <div className="searchBar">
-        <div className="bookmark">
+        {location.pathname === '/' ? (
+          ''
+        ) : (
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate('/');
+            }}
+            className="homePage">
+            <HomePage />
+          </div>
+        )}
+
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate('/bookmarks');
+          }}
+          className="bookmark">
           <div className="counter">{bookmarkCount}</div>
           <BookmarkSVG />
         </div>

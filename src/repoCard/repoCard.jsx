@@ -25,11 +25,11 @@ const RepoCard = () => {
             className="linkedProp"
             key={el.id}>
             {el.name}
-            {bookmarkedIds.includes(el.id) ? (
+            {bookmarkedIds.includes(el.owner.id) ? (
               <div
                 onClick={(e) => {
                   e.stopPropagation();
-                  dispatch(deleteBookMark(el.id));
+                  dispatch(deleteBookMark(el.owner.id));
                 }}
                 className="bookmarkAdd active">
                 <BookmarkAdded />

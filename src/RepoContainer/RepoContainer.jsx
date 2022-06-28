@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../Header/Header';
 import Pagination from '../Pagination/Pagination';
 import {
   fetchData,
+  reset,
   setCurrentPage,
   setCurrentRequest,
   setPagesArr,
@@ -16,9 +16,14 @@ import Spinner from '../Spinner/Spinner';
 import './RepoContainer.scss';
 
 const RepoContainer = () => {
-  const { isLoading, responseTopUsers, responseSearchUsers, urlError, serverError } = useSelector(
-    (state) => state.search,
-  );
+  const {
+    currentRequest,
+    isLoading,
+    responseTopUsers,
+    responseSearchUsers,
+    urlError,
+    serverError,
+  } = useSelector((state) => state.search);
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,7 +58,22 @@ const RepoContainer = () => {
   }, [responseSearchUsers]);
   return (
     <>
-      <Header />
+      <div className="headerWrapper">
+        {currentRequest ? <h2>Search request "{currentRequest}"</h2> : <h2>Top 10 repos</h2>}
+        {currentRequest ? (
+          <button
+            className="remove"
+            onClick={() => {
+              dispatch(reset());
+              navigate('/');
+              dispatch(fetchData({ type: 'responseTopUsers' }));
+            }}>
+            {'\u{274C}'}
+          </button>
+        ) : (
+          ''
+        )}
+      </div>
       <div className="table">
         <div className="header">
           <h3>Repo name</h3>
