@@ -4,6 +4,7 @@
     height:100%;
     box-sizing: border-box;
     padding: 25px;
+    min-height: 100vh;
 }
 
 .light{
@@ -45,7 +46,7 @@
                     box-shadow: 0 0 5px #101113;
                 }
             }
-            .searchBar, header{
+            .searchBar, .headerWrapper{
                 button{
                     color: #101113;
                     }
