@@ -16,14 +16,13 @@ export const bookmarkSlice = createSlice({
         link: action.payload.full_name,
         ...action.payload.owner,
       };
-      if (!state.bookmarks.includes((el) => el.id === action.payload.id)) {
-        state.bookmarks.push(bookmark);
-        state.bookmarkedIds.push(action.payload.owner.id);
-        state.bookmarkCount += 1;
-        localStorage.setItem('bookmarkedIds', JSON.stringify(state.bookmarkedIds));
-        localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
-        localStorage.setItem('bookmarkCount', state.bookmarkCount);
-      }
+
+      state.bookmarks.push(bookmark);
+      state.bookmarkedIds.push(action.payload.owner.id);
+      state.bookmarkCount += 1;
+      localStorage.setItem('bookmarkedIds', JSON.stringify(state.bookmarkedIds));
+      localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+      localStorage.setItem('bookmarkCount', state.bookmarkCount);
     },
     deleteBookMark(state, action) {
       state.bookmarkCount -= 1;

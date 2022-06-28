@@ -2,13 +2,11 @@
 .appContainer {
     margin:auto;
     height:100%;
-    
+    box-sizing: border-box;
     padding: 25px;
 }
 
 .light{
-    
-    height:100%; 
     div{
         color:black;
     }
@@ -47,12 +45,15 @@
                     box-shadow: 0 0 5px #101113;
                 }
             }
-            button{
-                color: #101113;
-                }
-                .remove {
-                   background-color: rgb(237, 238, 240);
-                }
+            .searchBar, header{
+                button{
+                    color: #101113;
+                    }
+                    .remove {
+                       background-color: rgb(237, 238, 240);
+                    }
+            }
+            
             .pageButton{
                 border: 1px solid #bbced3;
                 box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
@@ -74,8 +75,16 @@ button{
 }
 
 .dark{
-   height:100%;
     .appContainer{
+        .searchBar{
+            svg{
+                filter: invert(100%) sepia(1%) saturate(836%) hue-rotate(326deg) brightness(119%) contrast(100%);
+            }
+            .counter{
+                color:black;
+                background-color: white;
+            }
+        }
         .inputContainer{
             &:hover{
                 box-shadow: 0 0 6px white;
@@ -141,7 +150,6 @@ button{
         &.table {
             background-color: #373A40 ;
             box-shadow: rgba(255, 255, 255, 0.644) 0px 2px 8px;
-            // box-shadow: 0 1px 6px rgba(255, 255, 255, 0.219), 0 1px 4px rgba(255, 255, 255, 0.5);
             div{
                 background-color: #373A40 
             }
@@ -151,6 +159,34 @@ button{
     .background{
         border-radius: 12px;
     }
-
+.bookmarkAdd{
+    &.active{
+       svg{
+        fill: gold !important;
+       }
+    }
+}
+.table{
+    .bookmarkAdd{
+        svg{
+            fill:white;
+        }
+    }
+}
+.bookmarkContainer{
+    div{
+        background-color: #C1C2C5;
+        color:black;
+        
+    }
+    .RepoBookmark{
+        box-shadow: rgba(255, 255, 255, 0.644) 0px 2px 8px;
+    }
+    .remove{
+        color:black;
+        background-color: #C1C2C5 ;
+    }
+        
+}
 }
 

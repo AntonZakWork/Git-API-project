@@ -8,6 +8,13 @@
         cursor: pointer;
         font-size: 26px;
         margin: -40px 0px -40px -10px;
+        transition: transform 0.3s;
+        &:hover{
+            transform: scale(110%);
+        }
+        &:active{
+            transform: scale(90%); 
+        }
     }
     .themeButtonLight{
         background-color: $dark;
