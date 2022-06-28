@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Git-API-project/static/css/main.ba683806.css",
+    "main.js": "/Git-API-project/static/js/main.75534637.js",
+    "static/media/Inconsolata.ttf": "/Git-API-project/static/media/Inconsolata.9542b58c5e9ae17ccfca.ttf",
+    "static/media/BookmarkAdded.svg": "/Git-API-project/static/media/BookmarkAdded.4aad66666f981a5dee8a807ba92d4b9b.svg",
+    "static/media/BookmarkAdd.svg": "/Git-API-project/static/media/BookmarkAdd.baff05c1bde85df26e13b4cb1a3a9524.svg",
+    "static/media/homepage.svg": "/Git-API-project/static/media/homepage.008ea1433854421673b192a22b6db567.svg",
+    "static/media/Bookmark.svg": "/Git-API-project/static/media/Bookmark.e370bebc6348f0d34d4c6c189657d11e.svg",
+    "index.html": "/Git-API-project/index.html",
+    "main.ba683806.css.map": "/Git-API-project/static/css/main.ba683806.css.map",
+    "main.75534637.js.map": "/Git-API-project/static/js/main.75534637.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba683806.css",
+    "static/js/main.75534637.js"
+  ]
+}
