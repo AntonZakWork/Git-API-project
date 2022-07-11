@@ -13,6 +13,7 @@ import {
   setTotalReposCount,
 } from '../redux/Slices/SearchSlice';
 import RepoCard from '../repoCard/repoCard';
+import SmallLoading from '../SmallLoading/SmallLoading';
 import Spinner from '../Spinner/Spinner';
 import './RepoContainer.scss';
 
@@ -105,7 +106,7 @@ const RepoContainer = () => {
         <div className="header">
           <h3>Repo name</h3>
           <h3>Stars count</h3>
-          <h3>Updated at:</h3>
+          <h3 className="header updated">Updated at:</h3>
           <h3>GitHub link</h3>
         </div>
         {isLoading ? (
@@ -119,6 +120,7 @@ const RepoContainer = () => {
         )}
       </div>
       {/* {value ? <Pagination /> : ''} */}
+      {isFetching && <SmallLoading />}
     </>
   );
 };

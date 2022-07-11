@@ -1,5 +1,5 @@
 .popupContainer{
-    // background: transparent;
+    padding: 3px 10px;
     display: flex;
     align-items: center;
     
@@ -13,6 +13,8 @@
     height: 20px;
 }
 .popup{
+    margin-top: 5px;
+    position:absolute;
     box-shadow: rgba(0, 0, 0,  0.27) 14px 12px 9px;
 }
 

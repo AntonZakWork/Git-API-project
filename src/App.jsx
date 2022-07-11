@@ -40,7 +40,7 @@ function App() {
             <Route path={'/'} element={<RepoContainer />} />
             <Route path={'/Git-API-project'} element={<RepoContainer />} />
             <Route path="/repo/:author/:repo" element={<Repo />} />
-            <Route path="/search/:value/:pageNumber" element={<RepoContainer />} />
+            <Route path="/search/:value" element={<RepoContainer />} />
             <Route path="/error" element={<ErrorPage />} />
             <Route path="/bookmarks" element={<Bookmarks />} />
             <Route path="*" element={<NotFound />} />

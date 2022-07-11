@@ -61,7 +61,7 @@ const RepoCard = () => {
               dispatch(setIsLoading(true));
               navigate(`/repo/${el.full_name}`);
             }}
-            className="prop"
+            className="prop updated"
             key={el.updated_at}>
             {el.updated_at.toString().slice(0, 10)}
           </div>

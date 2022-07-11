@@ -5,6 +5,9 @@
     box-sizing: border-box;
     padding: 25px;
     min-height: 100vh;
+    @media (max-width: 575px) {
+        padding: 25px 5px;
+    }
 }
 
 .light{
@@ -72,6 +75,9 @@
 
 button{
     background-color: #fff;  
+}
+.smallLoading {
+    background-color: #edeef0;
 }
 }
 

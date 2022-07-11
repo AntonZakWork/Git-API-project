@@ -27,7 +27,7 @@ const Search = () => {
       dispatch(setCurrentPage(1));
       dispatch(setCurrentRequest(value));
       dispatch(fetchData({ type: 'responseSearchUsersFirst', value }));
-      navigate(`/search/${value}/1`);
+      navigate(`/search/${value}`);
     } else {
       searchRef.current.placeholder = 'Type your request!';
     }

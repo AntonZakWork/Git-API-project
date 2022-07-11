@@ -19,4 +19,8 @@
     .themeButtonLight{
         background-color: $dark;
     }
+    @media(max-width:650px) {
+        display: inline-block;
+        margin-top: -15px;
+    }
 }

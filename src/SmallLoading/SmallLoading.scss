@@ -1,0 +1,20 @@
+.smallLoading{
+    position: fixed;
+    width: 200px;
+    padding: 5px 0;
+    left: 50%;
+    margin-left: -100px;
+    bottom: 15px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 15%) 0px 0px 3px;
+    animation: appear 0.2s linear forwards;
+    @keyframes appear {
+        0%{
+            bottom: -15px;
+        }
+        100%{
+            bottom: 15px;
+        }
+    }
+}

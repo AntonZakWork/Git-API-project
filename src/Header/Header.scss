@@ -8,5 +8,7 @@
     padding-top: 25px;
     display: flex;
     justify-content: flex-end;
-   
+    @media (max-width: 650px){
+        margin-top: -51px;
+    }
 }

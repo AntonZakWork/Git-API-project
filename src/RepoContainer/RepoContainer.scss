@@ -3,6 +3,9 @@
     display: grid;
     grid-template-columns: 4fr 3fr 3fr 2fr;
    border-radius: 12px;
+   @media (max-width: 650px) {
+    grid-template-columns: 4fr 3fr 2fr;
+}
 }
 .header :nth-child(2){
     margin-left: -20px;
@@ -18,16 +21,37 @@
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    .header {
+         &.updated{
+            @media (max-width: 650px) {
+                display:none
+            }
+         }
+    }
     
 }
 .cardsWrapper{
     height:90%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    .container:last-child{
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+     @media (max-width: 650px) {
+        .prop {
+            &.updated{
+                display:none
+            }
+        }
+        
     }
+    .container{
+        &:last-child{
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        @media (max-width: 650px) {
+            grid-template-columns: 4fr 3fr 2fr;
+        }
+    }
+    
 }
 .headerWrapper{
     margin-top: -40px;
@@ -35,6 +59,17 @@
     background-color: transparent !important;
     display: flex;
     align-items: center;
+    @media (max-width: 650px) {
+        position:absolute;
+        width: 50%;
+        top: 41px;
+        margin-left: 10%;
+        h2{
+            display: inline-block;
+            margin: 0 auto;
+        }
+        
+    }
 
 }
 .remove{

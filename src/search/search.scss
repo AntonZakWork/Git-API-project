@@ -48,6 +48,7 @@
     }
 
 .inputContainer{
+    z-index:3;
     background-color: white;
     margin-bottom: 10px;
     position:relative;
@@ -63,16 +64,16 @@
         width: 400px;
         margin-bottom: 10px;
         input {
-            
             position: relative;
             opacity: 1;
             z-index: initial;
             cursor: initial;
-            width: calc(100% - var(--size));
+            // width: calc(100% - var(--size));
           }
     }
 
 .button{
+    outline: none;
     z-index: 1;
     margin: 0px 7px 2px;
     border: none;
