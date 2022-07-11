@@ -6,6 +6,7 @@ import {
   setCurrentPage,
   setCurrentRequest,
   fetchData,
+  reset,
 } from '../redux/Slices/SearchSlice';
 import './search.scss';
 import { ReactComponent as BookmarkSVG } from '../assets/bookmarks/Bookmark.svg';
@@ -25,8 +26,7 @@ const Search = () => {
     if (value) {
       dispatch(setCurrentPage(1));
       dispatch(setCurrentRequest(value));
-      const pageNumber = 1;
-      dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
+      dispatch(fetchData({ type: 'responseSearchUsersFirst', value }));
       navigate(`/search/${value}/1`);
     } else {
       searchRef.current.placeholder = 'Type your request!';
@@ -41,7 +41,9 @@ const Search = () => {
           <div
             onClick={(e) => {
               e.stopPropagation();
+              dispatch(reset());
               navigate('/');
+              dispatch(fetchData({ type: 'responseTopUsers' }));
             }}
             className="homePage">
             <HomePage />

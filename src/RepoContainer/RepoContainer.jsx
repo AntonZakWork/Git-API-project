@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
@@ -7,6 +7,7 @@ import {
   reset,
   setCurrentPage,
   setCurrentRequest,
+  setIsFetching,
   setPagesArr,
   setRepos,
   setTotalReposCount,
@@ -20,10 +21,28 @@ const RepoContainer = () => {
     currentRequest,
     isLoading,
     responseTopUsers,
-    responseSearchUsers,
+    responseSearchUsersFirst,
     urlError,
     serverError,
+    isFetching,
   } = useSelector((state) => state.search);
+  const [currPage, setcurrPage] = useState(2);
+  useEffect(() => {
+    if (isFetching) {
+      dispatch(fetchData({ type: 'responseSearchUsersScroll', value, currPage }));
+      setcurrPage((prev) => prev + 1);
+    }
+  }, [isFetching]);
+  const scrollHandler = (e) => {
+    if (
+      !isFetching &&
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+        30
+    ) {
+      dispatch(setIsFetching(true));
+    }
+  };
   const { value, pageNumber } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,9 +53,17 @@ const RepoContainer = () => {
 
   useEffect(() => {
     if (value) {
+      document.addEventListener('scroll', scrollHandler);
+    }
+
+    return () => document.removeEventListener('scroll', scrollHandler);
+  }, [value]);
+  useEffect(() => {
+    if (value) {
+      //   document.addEventListener('scroll', scrollHandler);
       dispatch(setCurrentRequest(value));
       dispatch(setCurrentPage(pageNumber));
-      dispatch(fetchData({ type: 'responseSearchUsers', value, pageNumber }));
+      dispatch(fetchData({ type: 'responseSearchUsersFirst', value }));
     } else {
       dispatch(fetchData({ type: 'responseTopUsers' }));
     }
@@ -50,12 +77,12 @@ const RepoContainer = () => {
   }, [responseTopUsers]);
 
   useEffect(() => {
-    if (responseSearchUsers) {
-      dispatch(setTotalReposCount(responseSearchUsers.total_count));
+    if (responseSearchUsersFirst) {
+      dispatch(setTotalReposCount(responseSearchUsersFirst.total_count));
       dispatch(setPagesArr());
-      dispatch(setRepos(responseSearchUsers.items));
+      dispatch(setRepos(responseSearchUsersFirst.items));
     }
-  }, [responseSearchUsers]);
+  }, [responseSearchUsersFirst]);
   return (
     <>
       <div className="headerWrapper">
@@ -91,7 +118,7 @@ const RepoContainer = () => {
           </div>
         )}
       </div>
-      {value ? <Pagination /> : ''}
+      {/* {value ? <Pagination /> : ''} */}
     </>
   );
 };
