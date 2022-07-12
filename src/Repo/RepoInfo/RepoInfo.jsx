@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import image from '../../assets/star.png';
 import Popup from '../../Popup/Popup';
-import { changeShowPopup, fetchData } from '../../redux/Slices/SearchSlice';
-import Search from '../../Search/Search';
+import { changeShowPopup, fetchData, reset } from '../../redux/Slices/SearchSlice';
 import './RepoInfo.scss';
 const RepoInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { showPopup, currentRequest, currentPage, responseRepo } = useSelector(
-    (state) => state.search,
-  );
+  const { showPopup, currentRequest, responseRepo } = useSelector((state) => state.search);
 
   return (
     <>
@@ -22,6 +19,7 @@ const RepoInfo = () => {
             <div className="repoButtons">
               <button
                 onClick={() => {
+                  dispatch(reset());
                   navigate('/');
                   dispatch(fetchData({ type: 'responseTopUsers' }));
                 }}
@@ -31,7 +29,7 @@ const RepoInfo = () => {
               {currentRequest ? (
                 <button
                   onClick={() => {
-                    navigate(`/search/${currentRequest}/${currentPage}`);
+                    navigate(-1);
                   }}
                   className="returnButton">
                   Back to search

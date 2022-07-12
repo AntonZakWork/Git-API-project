@@ -44,7 +44,7 @@ const RepoContainer = () => {
       dispatch(setIsFetching(true));
     }
   };
-  const { value, pageNumber } = useParams();
+  const { value } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -63,7 +63,7 @@ const RepoContainer = () => {
     if (value) {
       //   document.addEventListener('scroll', scrollHandler);
       dispatch(setCurrentRequest(value));
-      dispatch(setCurrentPage(pageNumber));
+      //   dispatch(setCurrentPage(pageNumber));
       dispatch(fetchData({ type: 'responseSearchUsersFirst', value }));
     } else {
       dispatch(fetchData({ type: 'responseTopUsers' }));
