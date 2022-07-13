@@ -57,6 +57,8 @@ const initialState = {
   responseSearchUsersScroll: null,
   responseRepo: null,
   isFetching: false,
+  activeSort: 'stars',
+  ascendingOrder: false,
 };
 
 const isInt = (value) => {
@@ -97,6 +99,7 @@ export const searchSlice = createSlice({
     },
     setRepos(state, action) {
       state.repos = action.payload;
+      state.activeSort = 'stars';
     },
     setTotalReposCount(state, action) {
       state.totalReposCount = action.payload;
@@ -148,6 +151,43 @@ export const searchSlice = createSlice({
     setIsFetching(state, action) {
       state.isFetching = action.payload;
     },
+    sortRepos(state, action) {
+      if (action.payload !== state.activeSort) {
+        state.ascendingOrder = false;
+      }
+      switch (action.payload) {
+        default:
+          return state;
+        case 'alphabet': {
+          if (!state.ascendingOrder) {
+            state.repos.sort((a, b) => a.name.localeCompare(b.name));
+            state.ascendingOrder = true;
+          } else state.repos.reverse();
+          state.activeSort = action.payload;
+          return;
+        }
+        case 'stars': {
+          if (!state.ascendingOrder) {
+            if (!state.activeSort) {
+              state.repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+            }
+            state.repos.sort((a, b) => a.stargazers_count - b.stargazers_count);
+            state.ascendingOrder = true;
+          } else state.repos.reverse();
+          state.activeSort = action.payload;
+          return;
+        }
+        case 'update': {
+          debugger;
+          if (!state.ascendingOrder) {
+            state.repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+            state.ascendingOrder = true;
+          } else state.repos.reverse();
+          state.activeSort = action.payload;
+          return;
+        }
+      }
+    },
   },
   extraReducers: {
     [fetchData.pending]: (state) => {
@@ -178,5 +218,6 @@ export const {
   setResponse,
   resetErrors,
   setIsFetching,
+  sortRepos,
 } = searchSlice.actions;
 export default searchSlice.reducer;

@@ -3,6 +3,25 @@
     display: grid;
     grid-template-columns: 4fr 3fr 3fr 2fr;
    border-radius: 12px;
+   h3{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    .svgContainer {
+        width: 20px;
+        height: 20px;
+        // svg{
+        //     // 
+        // }
+        &.active{
+            svg{
+                filter: invert(47%) sepia(72%) saturate(5938%) hue-rotate(230deg) brightness(106%) contrast(101%);
+            }
+            
+        }
+    }
+
+   }
    @media (max-width: 650px) {
     grid-template-columns: 4fr 3fr 2fr;
 }
