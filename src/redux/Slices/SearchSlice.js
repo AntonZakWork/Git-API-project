@@ -178,7 +178,6 @@ export const searchSlice = createSlice({
           return;
         }
         case 'update': {
-          debugger;
           if (!state.ascendingOrder) {
             state.repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
             state.ascendingOrder = true;

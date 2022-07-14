@@ -173,6 +173,22 @@ button{
        }
     }
 }
+.header{
+    .svgContainer{
+        svg{
+            filter: invert(100%) sepia(99%) saturate(0%) hue-rotate(142deg) brightness(100%) contrast(104%); 
+        }
+        &.active{
+            svg{
+                filter: invert(93%) sepia(12%) saturate(7500%) hue-rotate(359deg) brightness(100%) contrast(101%);
+            }
+            
+        }
+    }
+    
+    
+    
+}
 .table{
     .bookmarkAdd{
         svg{
@@ -180,6 +196,7 @@ button{
         }
     }
 }
+
 .bookmarkContainer{
     div{
         background-color: #C1C2C5;

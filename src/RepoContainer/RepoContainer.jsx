@@ -47,6 +47,7 @@ const RepoContainer = () => {
         30
     ) {
       dispatch(setIsFetching(true));
+      e.target.documentElement.scrollTop -= 15;
     }
   };
   const { value } = useParams();
