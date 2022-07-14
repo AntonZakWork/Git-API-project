@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Git-API-project/static/css/main.997b2181.css",
-    "main.js": "/Git-API-project/static/js/main.05aecba3.js",
+    "main.css": "/Git-API-project/static/css/main.ada84597.css",
+    "main.js": "/Git-API-project/static/js/main.b194773c.js",
     "static/media/Inconsolata.ttf": "/Git-API-project/static/media/Inconsolata.9542b58c5e9ae17ccfca.ttf",
     "static/media/BookmarkAdded.svg": "/Git-API-project/static/media/BookmarkAdded.4aad66666f981a5dee8a807ba92d4b9b.svg",
     "static/media/BookmarkAdd.svg": "/Git-API-project/static/media/BookmarkAdd.baff05c1bde85df26e13b4cb1a3a9524.svg",
@@ -10,11 +10,11 @@
     "index.html": "/Git-API-project/index.html",
     "static/media/descending.svg": "/Git-API-project/static/media/descending.9058b252c8d254d6fe2df063166b6880.svg",
     "static/media/ascending.svg": "/Git-API-project/static/media/ascending.a9a35466cf0b533f0560855859184206.svg",
-    "main.997b2181.css.map": "/Git-API-project/static/css/main.997b2181.css.map",
-    "main.05aecba3.js.map": "/Git-API-project/static/js/main.05aecba3.js.map"
+    "main.ada84597.css.map": "/Git-API-project/static/css/main.ada84597.css.map",
+    "main.b194773c.js.map": "/Git-API-project/static/js/main.b194773c.js.map"
   },
   "entrypoints": [
-    "static/css/main.997b2181.css",
-    "static/js/main.05aecba3.js"
+    "static/css/main.ada84597.css",
+    "static/js/main.b194773c.js"
   ]
 }
